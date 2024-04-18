@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.domain.professional;
+package com.simples.dental.professionals.domain.profissional;
 
 import org.junit.jupiter.api.Test;
 
