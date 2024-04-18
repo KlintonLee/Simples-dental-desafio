@@ -30,4 +30,20 @@ public class ProfessionalTest {
         assertEquals(expectedActive, professional.isActive());
         assertNotNull(professional.getCreatedDate());
     }
+
+    @Test
+    public void givenAnActiveProfissional_whenCallDeactive_thenShouldReturnItDeactived() {
+        final var professional = Profissional.newProfissional(EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedActive = false;
+
+        professional.deactivate();
+
+        assertNotNull(professional);
+        assertNotNull(professional.getId());
+        assertEquals(EXPECTED_NOME, professional.getNome());
+        assertEquals(EXPECTED_CARGO, professional.getCargo());
+        assertEquals(EXPECTED_NASCIMENTO, professional.getNascimento());
+        assertEquals(expectedActive, professional.isActive());
+        assertNotNull(professional.getCreatedDate());
+    }
 }
