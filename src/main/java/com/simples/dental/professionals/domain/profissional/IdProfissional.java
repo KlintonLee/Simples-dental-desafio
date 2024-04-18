@@ -1,10 +1,12 @@
 package com.simples.dental.professionals.domain.profissional;
 
 import com.simples.dental.professionals.domain.Identifier;
+import lombok.Getter;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@Getter
 public class IdProfissional extends Identifier {
 
     private String value;
