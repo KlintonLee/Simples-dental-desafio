@@ -50,4 +50,10 @@ public class Profissional extends AggregateRoot<IdProfissional> {
     public void validate(ValidationHandler handler) {
 
     }
+
+    public Profissional deactivate() {
+        this.active = false;
+
+        return this;
+    }
 }
