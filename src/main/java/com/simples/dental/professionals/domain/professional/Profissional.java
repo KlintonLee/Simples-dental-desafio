@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.domain.professional;
 
 import com.simples.dental.professionals.domain.AggregateRoot;
-import com.simples.dental.professionals.domain.vaidations.ValidationHandler;
+import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.Getter;
 
 import java.time.Instant;

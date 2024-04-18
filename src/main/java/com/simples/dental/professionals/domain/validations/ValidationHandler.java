@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.domain.vaidations;
+package com.simples.dental.professionals.domain.validations;
 
 import java.util.List;
 

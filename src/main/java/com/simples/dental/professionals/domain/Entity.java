@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.domain;
 
-import com.simples.dental.professionals.domain.vaidations.ValidationHandler;
+import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
