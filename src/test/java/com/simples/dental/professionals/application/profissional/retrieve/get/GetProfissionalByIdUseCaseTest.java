@@ -1,7 +1,6 @@
-package com.simples.dental.professionals.application.profissional.retrieve;
+package com.simples.dental.professionals.application.profissional.retrieve.get;
 
 import com.simples.dental.professionals.application.exceptions.NotFoundException;
-import com.simples.dental.professionals.application.profissional.retrieve.get.DefaultGetProfissionalByIdUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
