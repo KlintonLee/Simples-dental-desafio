@@ -10,5 +10,7 @@ public interface ContatoGateway {
 
     Contato update(Contato contato);
 
+    boolean existsById(ContatoId id);
+
     void deleteById(ContatoId id);
 }
