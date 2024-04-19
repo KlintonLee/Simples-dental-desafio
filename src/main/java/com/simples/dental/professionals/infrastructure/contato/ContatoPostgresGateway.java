@@ -21,7 +21,7 @@ public class ContatoPostgresGateway implements ContatoGateway {
 
     @Override
     public Contato create(Contato contato) {
-        return this.repository.save(ContatoJpaEntity.from(contato)).toAggregate();
+        return save(contato);
     }
 
     @Override
@@ -31,16 +31,20 @@ public class ContatoPostgresGateway implements ContatoGateway {
 
     @Override
     public Contato update(Contato contato) {
-        return null;
+        return save(contato);
     }
 
     @Override
     public boolean existsById(ContatoId id) {
-        return false;
+        return this.repository.existsById(id.getValue());
     }
 
     @Override
     public void deleteById(ContatoId id) {
+        this.repository.deleteById(id.getValue());
+    }
 
+    private Contato save(Contato contato) {
+        return this.repository.save(ContatoJpaEntity.from(contato)).toAggregate();
     }
 }
