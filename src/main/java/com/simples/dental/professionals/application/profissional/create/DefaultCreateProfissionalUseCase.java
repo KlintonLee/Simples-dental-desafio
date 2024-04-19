@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.application.profissional.create;
 
-import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 

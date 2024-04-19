@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.application.profissional.retrieve.get;
 
 import com.simples.dental.professionals.exceptions.NotFoundException;
-import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 

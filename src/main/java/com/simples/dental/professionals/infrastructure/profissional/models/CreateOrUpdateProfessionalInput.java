@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.infrastructure.models;
+package com.simples.dental.professionals.infrastructure.profissional.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

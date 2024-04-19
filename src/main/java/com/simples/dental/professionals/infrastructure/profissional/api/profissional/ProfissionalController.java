@@ -1,7 +1,7 @@
-package com.simples.dental.professionals.infrastructure.api.profissional;
+package com.simples.dental.professionals.infrastructure.profissional.api.profissional;
 
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
-import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;
@@ -9,8 +9,8 @@ import com.simples.dental.professionals.application.profissional.retrieve.get.Ge
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
-import com.simples.dental.professionals.infrastructure.api.ProfissionalApi;
-import com.simples.dental.professionals.infrastructure.models.CreateOrUpdateProfessionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.api.ProfissionalApi;
+import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
