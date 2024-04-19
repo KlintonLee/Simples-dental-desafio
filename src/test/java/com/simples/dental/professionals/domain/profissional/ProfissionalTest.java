@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ProfessionalTest {
+public class ProfissionalTest {
 
     private static String EXPECTED_NOME = "John Doe";
 
