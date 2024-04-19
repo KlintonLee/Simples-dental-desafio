@@ -62,4 +62,8 @@ public class ProfissionalJpaEntity {
                 profissional.getCreatedDate()
         );
     }
+
+    public Profissional toAggregate() {
+        return Profissional.with(id, nome, cargo, nascimento, active, createdDate);
+    }
 }
