@@ -43,6 +43,22 @@ public class Contato extends AggregateRoot<ContatoId> {
         return new Contato(id, nome, contato, profissional, now);
     }
 
+    public static Contato with(
+            final ContatoId contatoId,
+            final String nome,
+            final String contato,
+            final Profissional profissional,
+            final LocalDate createdDate
+    ) {
+        return new Contato(
+                contatoId,
+                nome,
+                contato,
+                profissional,
+                createdDate
+        );
+    }
+
     public Contato update(
             final String nome,
             final String contato,
