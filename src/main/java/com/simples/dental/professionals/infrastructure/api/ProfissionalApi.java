@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.infrastructure.api;
 
 import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
-import com.simples.dental.professionals.infrastructure.models.CreateOrUpdateProfessionalDto;
+import com.simples.dental.professionals.infrastructure.models.CreateOrUpdateProfessionalInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,7 +24,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    public ResponseEntity<ProfissionalOutput> createProfissional(@RequestBody CreateOrUpdateProfessionalDto input);
+    public ResponseEntity<ProfissionalOutput> createProfissional(@RequestBody CreateOrUpdateProfessionalInput input);
 
     @GetMapping(
             value = "{id}",
@@ -52,7 +52,7 @@ public interface ProfissionalApi {
     })
     ResponseEntity<ProfissionalOutput> updateProfissional(
             @PathVariable String id,
-            @RequestBody CreateOrUpdateProfessionalDto input
+            @RequestBody CreateOrUpdateProfessionalInput input
     );
 
     @DeleteMapping(value = "{id}")
