@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.application.exceptions;
+package com.simples.dental.professionals.exceptions;
 
 public class NoStackTraceException extends RuntimeException {
 

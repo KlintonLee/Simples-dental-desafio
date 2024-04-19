@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.application.profissional.update;
 
-import com.simples.dental.professionals.application.exceptions.NotFoundException;
+import com.simples.dental.professionals.exceptions.NotFoundException;
 import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
