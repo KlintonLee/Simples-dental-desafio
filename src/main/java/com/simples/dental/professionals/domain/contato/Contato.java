@@ -41,6 +41,17 @@ public class Contato extends AggregateRoot<ContatoId> {
         return new Contato(id, nome, contato, profissionalId, now);
     }
 
+    public Contato update(
+            final String nome,
+            final String contato,
+            final String profissionalId
+    ) {
+        this.nome = nome;
+        this.contato = contato;
+        this.profissionalId = profissionalId;
+        return this;
+    }
+
     @Override
     public void validate(ValidationHandler handler) {
 
