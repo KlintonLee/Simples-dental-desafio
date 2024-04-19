@@ -46,6 +46,19 @@ public class Profissional extends AggregateRoot<IdProfissional> {
         return new Profissional(id, name, cargo, nascimento, active, now);
     }
 
+    public Profissional update(
+            final String nome,
+            final CargoProfissional cargo,
+            final Instant nascimento,
+            final boolean active
+    ) {
+        this.nome = nome;
+        this.cargo = cargo;
+        this.nascimento = nascimento;
+        this.active = active;
+        return this;
+    }
+
     @Override
     public void validate(ValidationHandler handler) {
 
