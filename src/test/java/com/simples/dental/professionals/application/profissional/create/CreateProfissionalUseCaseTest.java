@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Objects;
 
-import static com.simples.dental.professionals.application.UtilsConfigTest.*;
+import static com.simples.dental.professionals.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;

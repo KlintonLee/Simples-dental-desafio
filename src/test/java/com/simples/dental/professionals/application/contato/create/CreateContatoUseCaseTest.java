@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Objects;
 
-import static com.simples.dental.professionals.application.UtilsConfigTest.*;
+import static com.simples.dental.professionals.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
