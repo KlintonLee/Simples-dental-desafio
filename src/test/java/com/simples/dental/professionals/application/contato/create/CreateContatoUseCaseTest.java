@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.simples.dental.professionals.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,24 +35,29 @@ public class CreateContatoUseCaseTest {
 
     @Test
     public void givenAValidParams_whenCallCreationUseCase_thenShouldReturnANewContato() {
-        final var newProfissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
-        final var expectedProfissionalId = newProfissional.getId();
+        final var expectedProfissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedProfissionalId = expectedProfissional.getId();
         final var command = CreateContatoCommand.with(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, expectedProfissionalId.getValue());
-        when(profissionalGateway.existsById(expectedProfissionalId)).thenReturn(true);
+        when(profissionalGateway.findById(expectedProfissionalId)).thenReturn(Optional.of(expectedProfissional));
         when(contatoGateway.create(any())).thenAnswer(returnsFirstArg());
 
         final var actualOutput = useCase.execute(command);
 
         assertNotNull(actualOutput);
+        assertNotNull(actualOutput.profissional());
         assertEquals(EXPECTED_CONTATO_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CONTATO, actualOutput.contato());
-        assertEquals(expectedProfissionalId.getValue(), actualOutput.profissionalId());
+        assertEquals(expectedProfissionalId.getValue(), actualOutput.profissional().id());
+        assertEquals(expectedProfissional.getNome(), actualOutput.profissional().nome());
+        assertEquals(expectedProfissional.getCargo(), actualOutput.profissional().cargo());
+        assertEquals(expectedProfissional.getNascimento(), actualOutput.profissional().nascimento());
         assertNotNull(actualOutput.createdDate());
+        assertNotNull(actualOutput.profissional().createdDate());
 
         verify(contatoGateway, times(1)).create(argThat(contato ->
                 Objects.equals(EXPECTED_CONTATO_NOME, contato.getNome())
                         && Objects.equals(EXPECTED_CONTATO, contato.getContato())
-                        && Objects.equals(expectedProfissionalId.getValue(), contato.getProfissionalId())
+                        && Objects.equals(expectedProfissional, contato.getProfissional())
                         && Objects.nonNull(contato.getCreatedDate())
         ));
     }
@@ -60,8 +66,8 @@ public class CreateContatoUseCaseTest {
     public void givenANonExistingProfissionalId_whenCallCreationUseCase_thenThrowNotFoundException() {
         final var expectedProfissionalId = IdProfissional.from("123");
         final var command = CreateContatoCommand.with(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, expectedProfissionalId.getValue());
-        when(profissionalGateway.existsById(expectedProfissionalId)).thenReturn(false);
-        final var expectedErrorMessage = "Profissional com id 123 não encontrado";
+        when(profissionalGateway.findById(expectedProfissionalId)).thenReturn(Optional.empty());
+        final var expectedErrorMessage = "Profissional com ID 123 não foi encontrado";
 
         final var actualException = assertThrows(NotFoundException.class, () -> useCase.execute(command));
 

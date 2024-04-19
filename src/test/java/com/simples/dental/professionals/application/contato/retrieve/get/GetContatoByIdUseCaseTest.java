@@ -3,7 +3,7 @@ package com.simples.dental.professionals.application.contato.retrieve.get;
 import com.simples.dental.professionals.domain.contato.Contato;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
-import com.simples.dental.professionals.domain.profissional.IdProfissional;
+import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,18 +28,23 @@ public class GetContatoByIdUseCaseTest {
 
     @Test
     public void givenAValidContatoId_whenCallGetById_thenShouldReturnContatoData() {
-        final var expectedProfIssionalId = IdProfissional.from("123");
-        final var contato = Contato.newContato(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, expectedProfIssionalId.getValue());
+        final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var contato = Contato.newContato(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, profissional);
         final var contatoId = contato.getId();
         when(contatoGateway.findById(contatoId)).thenReturn(Optional.of(contato));
 
         final var actualOutput = useCase.execute(contatoId.getValue());
 
         assertNotNull(actualOutput);
+        assertNotNull(actualOutput.profissional());
         assertEquals(EXPECTED_CONTATO_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CONTATO, actualOutput.contato());
-        assertEquals(expectedProfIssionalId.getValue(), actualOutput.profissionalId());
+        assertEquals(profissional.getId().getValue(), actualOutput.profissional().id());
+        assertEquals(profissional.getNome(), actualOutput.profissional().nome());
+        assertEquals(profissional.getCargo(), actualOutput.profissional().cargo());
+        assertEquals(profissional.getNascimento(), actualOutput.profissional().nascimento());
         assertNotNull(actualOutput.createdDate());
+        assertNotNull(actualOutput.profissional().createdDate());
     }
 
     @Test
@@ -58,8 +63,8 @@ public class GetContatoByIdUseCaseTest {
 
     @Test
     public void givenAValidContatoId_whenCallGetByIdThrowsAnUnexpectedError_thenShouldReturnException() {
-        final var expectedProfIssionalId = IdProfissional.from("123");
-        final var contato = Contato.newContato(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, expectedProfIssionalId.getValue());
+        final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var contato = Contato.newContato(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, profissional);
         final var contatoId = contato.getId();
         final var expectedErrorMessage = "Gateway Error";
         when(contatoGateway.findById(contatoId)).thenThrow(new IllegalStateException("Gateway Error"));
