@@ -26,16 +26,25 @@ public class DefaultUpdateContatoUseCase extends UpdateContatoUseCase {
     @Override
     public ContatoOutput execute(UpdateContatoCommand command) {
         final var contatoId = ContatoId.from(command.id());
-        final var contato = contatoGateway.findById(contatoId).orElseThrow(notFound(Contato.class, command.id()));
+        final var contato = contatoGateway
+                .findById(contatoId)
+                .orElseThrow(notFound(Contato.class, command.id()));
         final var profissionalId = IdProfissional.from(command.profissionalId());
 
-        if (!Objects.equals(contato.getProfissionalId(), command.profissionalId())) {
-            checkProfissionalExists(profissionalId);
-        }
-
-        contato.update(command.nome(), command.contato(), command.profissionalId());
+        updateContato(command, contato, profissionalId);
 
         return ContatoOutput.from(contatoGateway.update(contato));
+    }
+
+    private void updateContato(UpdateContatoCommand command, Contato contato, IdProfissional profissionalId) {
+        if (contato.getProfissional().getId().getValue().equals(profissionalId.getValue())) {
+            contato.update(command.nome(), command.contato(), contato.getProfissional());
+            return;
+        }
+
+        final var profissional = profissionalGateway.findById(profissionalId)
+                .orElseThrow(notFound(Profissional.class, command.profissionalId()));
+        contato.update(command.nome(), command.contato(), profissional);
     }
 
     private void checkProfissionalExists(IdProfissional profissionalId) {

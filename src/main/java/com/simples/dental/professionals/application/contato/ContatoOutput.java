@@ -1,6 +1,7 @@
 package com.simples.dental.professionals.application.contato;
 
 import com.simples.dental.professionals.domain.contato.Contato;
+import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 
 import java.time.LocalDate;
 
@@ -8,7 +9,7 @@ public record ContatoOutput(
         String id,
         String nome,
         String contato,
-        String profissionalId,
+        ProfissionalOutput profissional,
         LocalDate createdDate
 ) {
     public static ContatoOutput from(Contato aContato) {
@@ -16,7 +17,7 @@ public record ContatoOutput(
                 aContato.getId().getValue(),
                 aContato.getNome(),
                 aContato.getContato(),
-                aContato.getProfissionalId(),
+                ProfissionalOutput.with(aContato.getProfissional()),
                 aContato.getCreatedDate()
         );
     }
