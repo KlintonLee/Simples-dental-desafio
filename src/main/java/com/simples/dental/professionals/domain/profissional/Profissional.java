@@ -46,6 +46,24 @@ public class Profissional extends AggregateRoot<IdProfissional> {
         return new Profissional(id, name, cargo, nascimento, active, now);
     }
 
+    public static Profissional with(
+            final String id,
+            final String nome,
+            final CargoProfissional cargo,
+            final LocalDate nascimento,
+            final boolean active,
+            final LocalDate createdDate
+    ) {
+        return new Profissional(
+                IdProfissional.from(id),
+                nome,
+                cargo,
+                nascimento,
+                active,
+                createdDate
+        );
+    }
+
     public Profissional update(
             final String nome,
             final CargoProfissional cargo,
