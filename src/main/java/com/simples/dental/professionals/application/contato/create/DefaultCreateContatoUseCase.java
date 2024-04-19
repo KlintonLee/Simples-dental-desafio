@@ -1,5 +1,6 @@
 package com.simples.dental.professionals.application.contato.create;
 
+import com.simples.dental.professionals.application.contato.ContatoOutput;
 import com.simples.dental.professionals.domain.contato.Contato;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
@@ -20,7 +21,7 @@ public class DefaultCreateContatoUseCase extends CreateContatoUseCase {
     }
 
     @Override
-    public CreateContatoOutput execute(CreateContatoCommand command) {
+    public ContatoOutput execute(CreateContatoCommand command) {
         final var profissionalId = IdProfissional.from(command.profissionalId());
         final var profissionalMissing = !this.profissionalGateway.existsById(profissionalId);
         if (profissionalMissing) {
@@ -29,6 +30,6 @@ public class DefaultCreateContatoUseCase extends CreateContatoUseCase {
 
         final var contato = Contato
                 .newContato(command.nome(), command.contato(), command.profissionalId());
-        return CreateContatoOutput.from(this.contatoGateway.create(contato));
+        return ContatoOutput.from(this.contatoGateway.create(contato));
     }
 }
