@@ -13,4 +13,6 @@ public interface ProfissionalGateway {
     Profissional update(Profissional profissional);
 
     Pagination<Profissional> findAll(SearchQuery aQuery);
+
+    boolean existsById(IdProfissional id);
 }

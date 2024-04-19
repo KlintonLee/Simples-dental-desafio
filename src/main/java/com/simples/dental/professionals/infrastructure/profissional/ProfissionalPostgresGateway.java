@@ -43,6 +43,11 @@ public class ProfissionalPostgresGateway implements ProfissionalGateway {
         return null;
     }
 
+    @Override
+    public boolean existsById(IdProfissional id) {
+        return this.repository.existsById(id.getValue());
+    }
+
     private Profissional save(Profissional profissional) {
         return repository.save(ProfissionalJpaEntity.from(profissional)).toAggregate();
     }
