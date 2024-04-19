@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.application.profissional;
+package com.simples.dental.professionals.infrastructure.presenters;
 
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;

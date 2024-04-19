@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.infrastructure.api;
 
-import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
+import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.infrastructure.models.CreateOrUpdateProfessionalInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

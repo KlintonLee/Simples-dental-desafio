@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.infrastructure.api.profissional;
 
 import com.simples.dental.professionals.application.exceptions.UnprocessableEntityException;
-import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
+import com.simples.dental.professionals.infrastructure.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;
