@@ -1,12 +1,14 @@
 package com.simples.dental.professionals.domain.profissional;
 
 import com.simples.dental.professionals.domain.Identifier;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class IdProfissional extends Identifier {
 
     private String value;
