@@ -3,15 +3,15 @@ package com.simples.dental.professionals.application.profissional;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 public record ProfissionalOutput(
         String id,
         String nome,
         CargoProfissional cargo,
-        Instant nascimento,
+        LocalDate nascimento,
         boolean active,
-        Instant createdDate
+        LocalDate createdDate
 ) {
 
     public static ProfissionalOutput with(final Profissional profissional) {

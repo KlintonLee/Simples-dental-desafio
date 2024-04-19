@@ -11,11 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Optional;
 
+import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -25,12 +24,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class UpdateProfissionalUseCaseTest {
 
-    private static String EXPECTED_NOME = "John Doe";
-
-    private static CargoProfissional EXPECTED_CARGO = CargoProfissional.DESENVOLVEDOR;
-
-    private static Instant EXPECTED_NASCIMENTO = LocalDate.of(1900, 12, 25).atStartOfDay(ZoneId.systemDefault()).toInstant();
-
     @InjectMocks
     private DefaultUpdateProfissionalUseCase useCase;
 
@@ -39,7 +32,7 @@ public class UpdateProfissionalUseCaseTest {
 
     @Test
     public void givenAValidId_whenCallUpdate_thenShouldReturnUpdatedProfissional() {
-        final var profissional = Profissional.newProfissional("john", CargoProfissional.SUPORTE, Instant.now());
+        final var profissional = Profissional.newProfissional("john", CargoProfissional.SUPORTE, LocalDate.now());
         final var profissionalId = profissional.getId();
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.of(profissional));
         when(profissionalGateway.update(any())).thenAnswer(returnsFirstArg());

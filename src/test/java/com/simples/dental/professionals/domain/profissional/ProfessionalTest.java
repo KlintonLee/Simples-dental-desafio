@@ -2,9 +2,7 @@ package com.simples.dental.professionals.domain.profissional;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -15,7 +13,7 @@ public class ProfessionalTest {
 
     private static CargoProfissional EXPECTED_CARGO = CargoProfissional.DESENVOLVEDOR;
 
-    private static Instant EXPECTED_NASCIMENTO = LocalDate.of(1900, 12, 25).atStartOfDay(ZoneId.systemDefault()).toInstant();
+    private static LocalDate EXPECTED_NASCIMENTO = LocalDate.of(1900, 12, 25);
 
     @Test
     public void givenAValidParams_whenCallNewProfissional_thenReturnsANewOne() {

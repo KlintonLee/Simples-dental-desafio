@@ -4,7 +4,7 @@ import com.simples.dental.professionals.domain.AggregateRoot;
 import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.Getter;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 public class Profissional extends AggregateRoot<IdProfissional> {
@@ -13,19 +13,19 @@ public class Profissional extends AggregateRoot<IdProfissional> {
 
     private CargoProfissional cargo;
 
-    private Instant nascimento;
+    private LocalDate nascimento;
 
     private boolean active;
 
-    private Instant createdDate;
+    private LocalDate createdDate;
 
     protected Profissional(
             final IdProfissional profissionalID,
             final String nome,
             final CargoProfissional cargo,
-            final Instant nascimento,
+            final LocalDate nascimento,
             final boolean active,
-            final Instant createdDate
+            final LocalDate createdDate
     ) {
         super(profissionalID);
         this.nome = nome;
@@ -38,10 +38,10 @@ public class Profissional extends AggregateRoot<IdProfissional> {
     public static Profissional newProfissional(
             final String name,
             final CargoProfissional cargo,
-            final Instant nascimento
+            final LocalDate nascimento
     ) {
         final var id = IdProfissional.unique();
-        final var now = Instant.now();
+        final var now = LocalDate.now();
         final var active = true;
         return new Profissional(id, name, cargo, nascimento, active, now);
     }
@@ -49,7 +49,7 @@ public class Profissional extends AggregateRoot<IdProfissional> {
     public Profissional update(
             final String nome,
             final CargoProfissional cargo,
-            final Instant nascimento,
+            final LocalDate nascimento,
             final boolean active
     ) {
         this.nome = nome;

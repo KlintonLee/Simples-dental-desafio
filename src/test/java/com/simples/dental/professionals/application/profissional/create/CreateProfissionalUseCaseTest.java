@@ -1,6 +1,5 @@
 package com.simples.dental.professionals.application.profissional.create;
 
-import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,11 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Objects;
 
+import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,11 +23,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class CreateProfissionalUseCaseTest {
 
-    private static String EXPECTED_NOME = "John Doe";
 
-    private static CargoProfissional EXPECTED_CARGO = CargoProfissional.DESENVOLVEDOR;
-
-    private static Instant EXPECTED_NASCIMENTO = LocalDate.of(1900, 12, 25).atStartOfDay(ZoneId.systemDefault()).toInstant();
     @InjectMocks
     private DefaultCreateProfissionalUseCase useCase;
 
