@@ -1,8 +1,10 @@
 package com.simples.dental.professionals.application.contato.create;
 
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
+import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
+import com.simples.dental.professionals.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -52,5 +54,18 @@ public class CreateContatoUseCaseTest {
                         && Objects.equals(expectedProfissionalId.getValue(), contato.getProfissionalId())
                         && Objects.nonNull(contato.getCreatedDate())
         ));
+    }
+
+    @Test
+    public void givenANonExistingProfissionalId_whenCallCreationUseCase_thenThrowNotFoundException() {
+        final var expectedProfissionalId = IdProfissional.from("123");
+        final var command = CreateContatoCommand.with(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, expectedProfissionalId.getValue());
+        when(profissionalGateway.existsById(expectedProfissionalId)).thenReturn(false);
+        final var expectedErrorMessage = "Profissional com id 123 não encontrado";
+
+        final var actualException = assertThrows(NotFoundException.class, () -> useCase.execute(command));
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+        verify(contatoGateway, times(0)).create(any());
     }
 }
