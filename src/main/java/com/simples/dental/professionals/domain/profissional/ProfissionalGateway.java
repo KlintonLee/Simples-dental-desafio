@@ -13,6 +13,4 @@ public interface ProfissionalGateway {
     Profissional update(Profissional profissional);
 
     Pagination<Profissional> findAll(SearchQuery aQuery);
-
-    void deleteById(IdProfissional id);
 }
