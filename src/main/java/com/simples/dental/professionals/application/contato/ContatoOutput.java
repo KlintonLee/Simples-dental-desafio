@@ -1,18 +1,18 @@
-package com.simples.dental.professionals.application.contato.create;
+package com.simples.dental.professionals.application.contato;
 
 import com.simples.dental.professionals.domain.contato.Contato;
 
 import java.time.LocalDate;
 
-public record CreateContatoOutput(
+public record ContatoOutput(
         String id,
         String nome,
         String contato,
         String profissionalId,
         LocalDate createdDate
 ) {
-    public static CreateContatoOutput from(Contato aContato) {
-        return new CreateContatoOutput(
+    public static ContatoOutput from(Contato aContato) {
+        return new ContatoOutput(
                 aContato.getId().getValue(),
                 aContato.getNome(),
                 aContato.getContato(),
