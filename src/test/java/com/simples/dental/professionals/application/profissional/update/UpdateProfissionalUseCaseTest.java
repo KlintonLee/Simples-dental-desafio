@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
+import static com.simples.dental.professionals.application.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -36,12 +36,12 @@ public class UpdateProfissionalUseCaseTest {
         final var profissionalId = profissional.getId();
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.of(profissional));
         when(profissionalGateway.update(any())).thenAnswer(returnsFirstArg());
-        final var command = UpdateProfissionalCommand.with(profissionalId.getValue(), EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var command = UpdateProfissionalCommand.with(profissionalId.getValue(), EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
 
         final var actualOutput = useCase.execute(command);
 
         assertNotNull(actualOutput);
-        assertEquals(EXPECTED_NOME, actualOutput.nome());
+        assertEquals(EXPECTED_PROFISSIONAL_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CARGO, actualOutput.cargo());
         assertEquals(EXPECTED_NASCIMENTO, actualOutput.nascimento());
         assertTrue(actualOutput.active());
@@ -54,7 +54,7 @@ public class UpdateProfissionalUseCaseTest {
         final var expectedErrorMessage = "Profissional com ID invalid não foi encontrado";
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.empty());
 
-        final var command = UpdateProfissionalCommand.with(profissionalId.getValue(), EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var command = UpdateProfissionalCommand.with(profissionalId.getValue(), EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
 
         final var actualException = assertThrows(NotFoundException.class, () -> useCase.execute(command));
 

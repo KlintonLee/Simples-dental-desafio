@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Objects;
 
-import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
+import static com.simples.dental.professionals.application.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,19 +32,19 @@ public class CreateProfissionalUseCaseTest {
 
     @Test
     public void givenAValidParams_whenCallCreationUseCase_thenShouldReturnANewProfissional() {
-        final var command = CreateProfissionalCommand.with(EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var command = CreateProfissionalCommand.with(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
         when(profissionalGateway.create(any())).thenAnswer(returnsFirstArg());
 
         final var actualOutput = useCase.execute(command);
 
         assertNotNull(actualOutput);
-        assertEquals(EXPECTED_NOME, actualOutput.nome());
+        assertEquals(EXPECTED_PROFISSIONAL_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CARGO, actualOutput.cargo());
         assertEquals(EXPECTED_NASCIMENTO, actualOutput.nascimento());
         assertTrue(actualOutput.active());
         assertNotNull(actualOutput.createdDate());
         verify(profissionalGateway, times(1)).create(argThat(profissional ->
-                Objects.equals(EXPECTED_NOME, profissional.getNome())
+                Objects.equals(EXPECTED_PROFISSIONAL_NOME, profissional.getNome())
                 && Objects.equals(EXPECTED_CARGO, profissional.getCargo())
                 && Objects.equals(EXPECTED_NASCIMENTO, profissional.getNascimento())
                 && profissional.isActive()

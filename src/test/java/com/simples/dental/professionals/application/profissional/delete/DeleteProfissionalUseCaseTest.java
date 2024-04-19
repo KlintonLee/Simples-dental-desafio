@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
+import static com.simples.dental.professionals.application.UtilsConfigTest.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -28,7 +28,7 @@ public class DeleteProfissionalUseCaseTest {
 
     @Test
     public void givenAValidId_whenCallDeleteProfissional_thenShouldExecuteLogicalDeletion() {
-        final var profissional = Profissional.newProfissional(EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
         final var profissionalId = profissional.getId();
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.of(profissional));
         when(profissionalGateway.update(any())).thenAnswer(returnsFirstArg());

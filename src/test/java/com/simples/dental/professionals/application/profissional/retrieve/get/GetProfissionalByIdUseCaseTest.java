@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static com.simples.dental.professionals.application.profissional.UtilsConfigTest.*;
+import static com.simples.dental.professionals.application.UtilsConfigTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +27,7 @@ public class GetProfissionalByIdUseCaseTest {
 
     @Test
     public void givenAValidProfissionalId_whenCallGetById_thenShouldReturnProfissionalData() {
-        final var profissional = Profissional.newProfissional(EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
         final var profissionalId = profissional.getId();
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.of(profissional));
 
@@ -35,7 +35,7 @@ public class GetProfissionalByIdUseCaseTest {
 
         assertNotNull(actualOutput);
         assertNotNull(actualOutput.id());
-        assertEquals(EXPECTED_NOME, actualOutput.nome());
+        assertEquals(EXPECTED_PROFISSIONAL_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CARGO, actualOutput.cargo());
         assertEquals(EXPECTED_NASCIMENTO, actualOutput.nascimento());
         assertTrue(actualOutput.active());
@@ -58,7 +58,7 @@ public class GetProfissionalByIdUseCaseTest {
 
     @Test
     public void givenAValidProfissionalId_whenCallGetByIdThrowsAnUnexpectedError_thenShouldReturnException() {
-        final var profissional = Profissional.newProfissional(EXPECTED_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
         final var profissionalId = profissional.getId();
         final var expectedErrorMessage = "Gateway Error";
         when(profissionalGateway.findById(profissionalId)).thenThrow(new IllegalStateException("Gateway Error"));
