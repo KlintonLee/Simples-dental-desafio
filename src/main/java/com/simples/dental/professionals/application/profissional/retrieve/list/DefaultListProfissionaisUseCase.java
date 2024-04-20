@@ -7,11 +7,11 @@ import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 import java.util.Map;
 import java.util.Objects;
 
-public class DefaultListProfissionalUseCase extends ListProfissionalUseCase{
+public class DefaultListProfissionaisUseCase extends ListProfissionaisUseCase {
 
     private final ProfissionalGateway profissionalGateway;
 
-    public DefaultListProfissionalUseCase(ProfissionalGateway profissionalGateway) {
+    public DefaultListProfissionaisUseCase(ProfissionalGateway profissionalGateway) {
         this.profissionalGateway = Objects.requireNonNull(profissionalGateway);
     }
 

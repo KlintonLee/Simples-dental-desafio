@@ -6,6 +6,6 @@ import com.simples.dental.professionals.domain.pagination.SearchQuery;
 
 import java.util.Map;
 
-public abstract class ListProfissionalUseCase
+public abstract class ListProfissionaisUseCase
     extends UseCase<SearchQuery, Pagination<Map<String, String>>> {
 }
