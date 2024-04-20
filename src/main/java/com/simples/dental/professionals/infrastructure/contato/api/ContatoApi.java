@@ -1,7 +1,8 @@
 package com.simples.dental.professionals.infrastructure.contato.api;
 
-import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.CreateContatoInput;
 import com.simples.dental.professionals.infrastructure.contato.models.ContatoResponse;
+import com.simples.dental.professionals.infrastructure.contato.models.UpdateContatoInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,7 +25,7 @@ public interface ContatoApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ResponseEntity<ContatoResponse> createContato(@RequestBody CreateOrUpdateContatoInput input);
+    ResponseEntity<ContatoResponse> createContato(@RequestBody CreateContatoInput input);
 
     @GetMapping(
             value = "{id}",
@@ -52,7 +53,7 @@ public interface ContatoApi {
     })
     ResponseEntity<ContatoResponse> updateContato(
             @PathVariable String id,
-            @RequestBody CreateOrUpdateContatoInput input
+            @RequestBody UpdateContatoInput input
     );
 
     @DeleteMapping(value = "{id}")

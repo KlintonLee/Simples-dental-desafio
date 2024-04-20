@@ -6,8 +6,9 @@ import com.simples.dental.professionals.application.contato.delete.DeleteContato
 import com.simples.dental.professionals.application.contato.retrieve.get.GetContatoByIdUseCase;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoCommand;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoUseCase;
-import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.CreateContatoInput;
 import com.simples.dental.professionals.infrastructure.contato.models.ContatoResponse;
+import com.simples.dental.professionals.infrastructure.contato.models.UpdateContatoInput;
 import com.simples.dental.professionals.infrastructure.contato.presenters.ContatoPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class ContatoController implements ContatoApi {
     }
 
     @Override
-    public ResponseEntity<ContatoResponse> createContato(CreateOrUpdateContatoInput input) {
+    public ResponseEntity<ContatoResponse> createContato(CreateContatoInput input) {
         final var command = CreateContatoCommand.with(input.nome(), input.contato(), input.profissional_id());
         final var contato = this.createContatoUseCase.execute(command);
 
@@ -54,7 +55,7 @@ public class ContatoController implements ContatoApi {
     }
 
     @Override
-    public ResponseEntity<ContatoResponse> updateContato(String id, CreateOrUpdateContatoInput input) {
+    public ResponseEntity<ContatoResponse> updateContato(String id, UpdateContatoInput input) {
         final var command = UpdateContatoCommand.with(id, input.nome(), input.contato(), input.profissional_id());
         final var contato = this.updateContatoUseCase.execute(command);
         return ResponseEntity.ok(ContatoPresenter.present(contato));
