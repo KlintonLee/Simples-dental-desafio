@@ -5,7 +5,7 @@ import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
 import com.simples.dental.professionals.infrastructure.configuration.ControllerHelpers;
-import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;
@@ -13,7 +13,6 @@ import com.simples.dental.professionals.application.profissional.retrieve.get.Ge
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
-import com.simples.dental.professionals.infrastructure.profissional.api.ProfissionalApi;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

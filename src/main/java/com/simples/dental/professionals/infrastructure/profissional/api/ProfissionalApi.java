@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.infrastructure.profissional.api;
 
 import com.simples.dental.professionals.domain.pagination.Pagination;
-import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.application.contato;
 
 import com.simples.dental.professionals.domain.contato.Contato;
-import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
+import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 
 import java.time.LocalDate;
 
