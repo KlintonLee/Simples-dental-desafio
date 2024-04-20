@@ -4,6 +4,7 @@ import com.simples.dental.professionals.application.profissional.retrieve.list.L
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.infrastructure.configuration.ControllerHelpers;
 import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
@@ -66,9 +67,7 @@ public class ProfissionalController implements ProfissionalApi {
 
     @Override
     public Pagination<Map<String, String>> listProfissionais(int page, int perPage, String q, List<String> fields) {
-        if (fields == null) {
-            fields = List.of("*");
-        }
+        fields = ControllerHelpers.fieldsMapper(fields);
         final var query = SearchQuery.with(page, perPage, q, fields);
         return listUseCase.execute(query);
     }
