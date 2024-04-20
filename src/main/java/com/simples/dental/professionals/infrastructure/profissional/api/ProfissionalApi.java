@@ -1,5 +1,6 @@
 package com.simples.dental.professionals.infrastructure.profissional.api;
 
+import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("profissionais")
 @Tag(name = "Profissionais")
@@ -37,6 +41,20 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
     ProfissionalOutput getById(@PathVariable String id);
+
+    @GetMapping
+    @Operation(summary = "Lista todos profissionais paginado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Listado com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Um erro de validação dos parâmetros foi lançado"),
+            @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor"),
+    })
+    Pagination<Map<String, String>> listProfissionais(
+            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
+            @RequestParam(name = "q", required = false, defaultValue = "") final String q,
+            @RequestParam(name = "fields", required = false) final List<String> fields
+    );
 
     @PutMapping(
             value = "{id}",

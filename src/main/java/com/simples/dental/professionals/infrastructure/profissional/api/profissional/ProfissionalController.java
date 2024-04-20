@@ -1,5 +1,8 @@
 package com.simples.dental.professionals.infrastructure.profissional.api.profissional;
 
+import com.simples.dental.professionals.application.profissional.retrieve.list.ListProfissionaisUseCase;
+import com.simples.dental.professionals.domain.pagination.Pagination;
+import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
 import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
@@ -15,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -25,6 +30,8 @@ public class ProfissionalController implements ProfissionalApi {
 
     private final GetProfissionalByIdUseCase getByIdUseCase;
 
+    private final ListProfissionaisUseCase listUseCase;
+
     private final UpdateProfissionalUseCase updateUseCase;
 
     private final DeleteProfissionalUseCase deleteUseCase;
@@ -32,11 +39,13 @@ public class ProfissionalController implements ProfissionalApi {
     public ProfissionalController(
             final CreateProfissionalUseCase createUseCase,
             final GetProfissionalByIdUseCase getByIdUseCase,
+            final ListProfissionaisUseCase listUseCase,
             final UpdateProfissionalUseCase updateUseCase,
             final DeleteProfissionalUseCase deleteUseCase
     ) {
         this.createUseCase = Objects.requireNonNull(createUseCase);
         this.getByIdUseCase = Objects.requireNonNull(getByIdUseCase);
+        this.listUseCase = Objects.requireNonNull(listUseCase);
         this.updateUseCase = Objects.requireNonNull(updateUseCase);
         this.deleteUseCase = Objects.requireNonNull(deleteUseCase);
     }
@@ -53,6 +62,15 @@ public class ProfissionalController implements ProfissionalApi {
     @Override
     public ProfissionalOutput getById(String id) {
         return getByIdUseCase.execute(id);
+    }
+
+    @Override
+    public Pagination<Map<String, String>> listProfissionais(int page, int perPage, String q, List<String> fields) {
+        if (fields == null) {
+            fields = List.of("*");
+        }
+        final var query = SearchQuery.with(page, perPage, q, fields);
+        return listUseCase.execute(query);
     }
 
     @Override
