@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
-public record CreateOrUpdateProfessionalInput(
+public record UpdateProfissionalInput(
         String nome,
         String cargo,
         @JsonFormat(pattern = "dd-MM-yyyy")

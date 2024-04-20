@@ -12,8 +12,9 @@ import com.simples.dental.professionals.application.profissional.retrieve.get.Ge
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
-import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.models.CreateProfissionalInput;
 import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalResponse;
+import com.simples.dental.professionals.infrastructure.profissional.models.UpdateProfissionalInput;
 import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +53,7 @@ public class ProfissionalController implements ProfissionalApi {
     }
 
     @Override
-    public ResponseEntity<ProfissionalResponse> createProfissional(CreateOrUpdateProfessionalInput input) {
+    public ResponseEntity<ProfissionalResponse> createProfissional(CreateProfissionalInput input) {
         final var cargo = serializeCargo(input.cargo());
         final var command = CreateProfissionalCommand.with(input.nome(), cargo, input.nascimento());
 
@@ -74,7 +75,7 @@ public class ProfissionalController implements ProfissionalApi {
     }
 
     @Override
-    public ResponseEntity<ProfissionalResponse> updateProfissional(String id, CreateOrUpdateProfessionalInput input) {
+    public ResponseEntity<ProfissionalResponse> updateProfissional(String id, UpdateProfissionalInput input) {
         final var cargo = serializeCargo(input.cargo());
         final var command = UpdateProfissionalCommand.with(id, input.nome(), cargo, input.nascimento());
 
