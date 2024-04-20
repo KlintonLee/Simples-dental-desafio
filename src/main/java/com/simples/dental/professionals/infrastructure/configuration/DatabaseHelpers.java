@@ -25,14 +25,14 @@ public class DatabaseHelpers {
 
     public static List<Map<String, String>> mapFieldsWithListOfStringArray(List<String> fields, List<String[]> rawInput) {
         List<Map<String, String>> result = new ArrayList<>();
-        Map<String, String> map = new HashMap<>();
 
         rawInput.forEach(raw -> {
+            Map<String, String> map = new HashMap<>();
             for (int i = 0; i < fields.size(); i++) {
                 map.put(fields.get(i), raw[i]);
             }
+            result.add(map);
         });
-        result.add(map);
 
         return result;
     }
