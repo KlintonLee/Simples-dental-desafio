@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.infrastructure.profissional.api.profissional;
+package com.simples.dental.professionals.infrastructure.profissional.api;
 
 import com.simples.dental.professionals.application.profissional.retrieve.list.ListProfissionaisUseCase;
 import com.simples.dental.professionals.domain.pagination.Pagination;
