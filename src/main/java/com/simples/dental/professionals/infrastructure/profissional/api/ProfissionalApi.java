@@ -1,8 +1,8 @@
 package com.simples.dental.professionals.infrastructure.profissional.api;
 
 import com.simples.dental.professionals.domain.pagination.Pagination;
-import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,7 +28,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    public ResponseEntity<ProfissionalOutput> createProfissional(@RequestBody CreateOrUpdateProfessionalInput input);
+    public ResponseEntity<ProfissionalResponse> createProfissional(@RequestBody CreateOrUpdateProfessionalInput input);
 
     @GetMapping(
             value = "{id}",
@@ -40,7 +40,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "404", description = "Profisional não localizado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ProfissionalOutput getById(@PathVariable String id);
+    ProfissionalResponse getById(@PathVariable String id);
 
     @GetMapping
     @Operation(summary = "Lista todos profissionais paginado")
@@ -68,7 +68,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ResponseEntity<ProfissionalOutput> updateProfissional(
+    ResponseEntity<ProfissionalResponse> updateProfissional(
             @PathVariable String id,
             @RequestBody CreateOrUpdateProfessionalInput input
     );

@@ -5,7 +5,6 @@ import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
 import com.simples.dental.professionals.infrastructure.configuration.ControllerHelpers;
-import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;
@@ -14,6 +13,8 @@ import com.simples.dental.professionals.application.profissional.update.UpdatePr
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateProfessionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalResponse;
+import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,17 +52,18 @@ public class ProfissionalController implements ProfissionalApi {
     }
 
     @Override
-    public ResponseEntity<ProfissionalOutput> createProfissional(CreateOrUpdateProfessionalInput input) {
+    public ResponseEntity<ProfissionalResponse> createProfissional(CreateOrUpdateProfessionalInput input) {
         final var cargo = serializeCargo(input.cargo());
         final var command = CreateProfissionalCommand.with(input.nome(), cargo, input.nascimento());
 
         final var profissional = createUseCase.execute(command);
-        return ResponseEntity.created(URI.create("/profissionais/" + profissional.id())).build();
+        final var profissionalResponse = ProfissionalPresenter.present(profissional);
+        return ResponseEntity.created(URI.create("/profissionais/" + profissional.id())).body(profissionalResponse);
     }
 
     @Override
-    public ProfissionalOutput getById(String id) {
-        return getByIdUseCase.execute(id);
+    public ProfissionalResponse getById(String id) {
+        return ProfissionalPresenter.present(getByIdUseCase.execute(id));
     }
 
     @Override
@@ -72,12 +74,12 @@ public class ProfissionalController implements ProfissionalApi {
     }
 
     @Override
-    public ResponseEntity<ProfissionalOutput> updateProfissional(String id, CreateOrUpdateProfessionalInput input) {
+    public ResponseEntity<ProfissionalResponse> updateProfissional(String id, CreateOrUpdateProfessionalInput input) {
         final var cargo = serializeCargo(input.cargo());
         final var command = UpdateProfissionalCommand.with(id, input.nome(), cargo, input.nascimento());
 
         final var profissional = updateUseCase.execute(command);
-        return ResponseEntity.ok(profissional);
+        return ResponseEntity.ok(ProfissionalPresenter.present(profissional));
     }
 
     @Override
