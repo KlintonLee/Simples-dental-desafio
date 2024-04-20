@@ -7,6 +7,6 @@ public record ContatoResponse(
         @JsonProperty("id") String id,
         @JsonProperty("nome") String nome,
         @JsonProperty("contato") String contato,
-        @JsonProperty("profissiona") ProfissionalOutput profissional
+        @JsonProperty("profissional") ProfissionalOutput profissional
 ) {
 }
