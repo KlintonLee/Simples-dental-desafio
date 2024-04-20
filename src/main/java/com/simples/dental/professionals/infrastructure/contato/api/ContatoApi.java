@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.infrastructure.contato.api;
 
-import com.simples.dental.professionals.application.contato.ContatoOutput;
 import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.ContatoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,7 +24,7 @@ public interface ContatoApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    public ResponseEntity<ContatoOutput> createContato(@RequestBody CreateOrUpdateContatoInput input);
+    ResponseEntity<ContatoResponse> createContato(@RequestBody CreateOrUpdateContatoInput input);
 
     @GetMapping(
             value = "{id}",
@@ -36,7 +36,7 @@ public interface ContatoApi {
             @ApiResponse(responseCode = "404", description = "Contato não localizado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ContatoOutput getById(@PathVariable String id);
+    ContatoResponse getById(@PathVariable String id);
 
     @PutMapping(
             value = "{id}",
@@ -50,7 +50,7 @@ public interface ContatoApi {
             @ApiResponse(responseCode = "422", description = "Um erro de validação foi lançado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ResponseEntity<ContatoOutput> updateContato(
+    ResponseEntity<ContatoResponse> updateContato(
             @PathVariable String id,
             @RequestBody CreateOrUpdateContatoInput input
     );

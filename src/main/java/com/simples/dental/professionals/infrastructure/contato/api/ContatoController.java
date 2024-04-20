@@ -1,6 +1,5 @@
 package com.simples.dental.professionals.infrastructure.contato.api;
 
-import com.simples.dental.professionals.application.contato.ContatoOutput;
 import com.simples.dental.professionals.application.contato.create.CreateContatoCommand;
 import com.simples.dental.professionals.application.contato.create.CreateContatoUseCase;
 import com.simples.dental.professionals.application.contato.delete.DeleteContatoUseCase;
@@ -8,6 +7,8 @@ import com.simples.dental.professionals.application.contato.retrieve.get.GetCont
 import com.simples.dental.professionals.application.contato.update.UpdateContatoCommand;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoUseCase;
 import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.ContatoResponse;
+import com.simples.dental.professionals.infrastructure.contato.presenters.ContatoPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,21 +39,25 @@ public class ContatoController implements ContatoApi {
     }
 
     @Override
-    public ResponseEntity<ContatoOutput> createContato(CreateOrUpdateContatoInput input) {
+    public ResponseEntity<ContatoResponse> createContato(CreateOrUpdateContatoInput input) {
         final var command = CreateContatoCommand.with(input.nome(), input.contato(), input.profissional_id());
         final var contato = this.createContatoUseCase.execute(command);
-        return ResponseEntity.created(URI.create("/contatos" + contato.id())).body(contato);
+
+        final var contatoResponse = ContatoPresenter.present(contato);
+        return ResponseEntity.created(URI.create("/contatos" + contato.id())).body(contatoResponse);
     }
 
     @Override
-    public ContatoOutput getById(String id) {
-        return this.getContatoByIdUseCase.execute(id);
+    public ContatoResponse getById(String id) {
+        final var contato = this.getContatoByIdUseCase.execute(id);
+        return ContatoPresenter.present(contato);
     }
 
     @Override
-    public ResponseEntity<ContatoOutput> updateContato(String id, CreateOrUpdateContatoInput input) {
+    public ResponseEntity<ContatoResponse> updateContato(String id, CreateOrUpdateContatoInput input) {
         final var command = UpdateContatoCommand.with(id, input.nome(), input.contato(), input.profissional_id());
-        return ResponseEntity.ok(this.updateContatoUseCase.execute(command));
+        final var contato = this.updateContatoUseCase.execute(command);
+        return ResponseEntity.ok(ContatoPresenter.present(contato));
     }
 
     @Override
