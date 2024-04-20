@@ -6,6 +6,8 @@ import com.simples.dental.professionals.application.profissional.delete.DefaultD
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.retrieve.get.DefaultGetProfissionalByIdUseCase;
 import com.simples.dental.professionals.application.profissional.retrieve.get.GetProfissionalByIdUseCase;
+import com.simples.dental.professionals.application.profissional.retrieve.list.DefaultListProfissionaisUseCase;
+import com.simples.dental.professionals.application.profissional.retrieve.list.ListProfissionaisUseCase;
 import com.simples.dental.professionals.application.profissional.update.DefaultUpdateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
@@ -19,7 +21,6 @@ public class ProfissionalUseCaseConfiguration {
 
     private final ProfissionalGateway profissionalGateway;
 
-
     public ProfissionalUseCaseConfiguration(ProfissionalGateway profissionalGateway) {
         this.profissionalGateway = Objects.requireNonNull(profissionalGateway);
     }
@@ -32,6 +33,11 @@ public class ProfissionalUseCaseConfiguration {
     @Bean
     public GetProfissionalByIdUseCase getProfissionalByIdUseCase() {
         return new DefaultGetProfissionalByIdUseCase(profissionalGateway);
+    }
+
+    @Bean
+    public ListProfissionaisUseCase listProfissionaisUseCase() {
+        return new DefaultListProfissionaisUseCase(profissionalGateway);
     }
 
     @Bean
