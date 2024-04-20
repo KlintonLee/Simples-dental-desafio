@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.infrastructure.profissional.models;
+package com.simples.dental.professionals.infrastructure.contato.models;
 
 public record CreateOrUpdateContatoInput(
         String nome,

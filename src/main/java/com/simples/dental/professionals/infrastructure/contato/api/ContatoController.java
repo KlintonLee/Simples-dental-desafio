@@ -7,7 +7,7 @@ import com.simples.dental.professionals.application.contato.delete.DeleteContato
 import com.simples.dental.professionals.application.contato.retrieve.get.GetContatoByIdUseCase;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoCommand;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoUseCase;
-import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

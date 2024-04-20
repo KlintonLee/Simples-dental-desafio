@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.infrastructure.contato.api;
 
 import com.simples.dental.professionals.application.contato.ContatoOutput;
-import com.simples.dental.professionals.infrastructure.profissional.models.CreateOrUpdateContatoInput;
+import com.simples.dental.professionals.infrastructure.contato.models.CreateOrUpdateContatoInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
