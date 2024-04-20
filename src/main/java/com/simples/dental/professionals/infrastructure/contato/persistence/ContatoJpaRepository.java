@@ -2,13 +2,14 @@ package com.simples.dental.professionals.infrastructure.contato.persistence;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import static com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers.mapObjectArrayToStringArray;
 
 public interface ContatoJpaRepository extends JpaRepository<ContatoJpaEntity, String> {
 
-    default List<Object[]> selectByFields(EntityManager entityManager, List<String> fields, String q) {
+    default List<String[]> selectByFields(EntityManager entityManager, List<String> fields, String q) {
         String queryString = """
                 SELECT
                   %s
@@ -20,6 +21,8 @@ public interface ContatoJpaRepository extends JpaRepository<ContatoJpaEntity, St
                 """.formatted(String.join(", ", fields));
         Query nativeQuery = entityManager.createNativeQuery(queryString);
         nativeQuery.setParameter("q", "%" + q + "%");
-        return nativeQuery.getResultList();
+
+        final List<Object[]> rawData = nativeQuery.getResultList();
+        return mapObjectArrayToStringArray(rawData);
     }
 }
