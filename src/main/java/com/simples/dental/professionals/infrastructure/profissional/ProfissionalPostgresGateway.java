@@ -5,19 +5,25 @@ import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
+import com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers;
 import com.simples.dental.professionals.infrastructure.profissional.persistence.ProfissionalJpaEntity;
 import com.simples.dental.professionals.infrastructure.profissional.persistence.ProfissionalJpaRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 @Component
 public class ProfissionalPostgresGateway implements ProfissionalGateway {
 
+    private final EntityManager entityManager;
+
     private final ProfissionalJpaRepository repository;
 
-    public ProfissionalPostgresGateway(ProfissionalJpaRepository repository) {
+    public ProfissionalPostgresGateway(EntityManager entityManager, ProfissionalJpaRepository repository) {
+        this.entityManager = Objects.requireNonNull(entityManager);
         this.repository = Objects.requireNonNull(repository);
     }
 
@@ -39,8 +45,14 @@ public class ProfissionalPostgresGateway implements ProfissionalGateway {
     }
 
     @Override
-    public Pagination<Profissional> findAll(SearchQuery aQuery) {
-        return null;
+    public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
+        final var ramItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
+        final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(
+                aQuery.fields(),
+                ramItems
+        );
+
+        return new Pagination<>(aQuery.page(), aQuery.perPage(), items.size(), items);
     }
 
     @Override
