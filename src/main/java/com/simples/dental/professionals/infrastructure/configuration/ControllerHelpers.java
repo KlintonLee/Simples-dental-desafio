@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class ControllerHelpers {
 
-    public static List<String> fieldsMapper(List<String> fields) {
+    public static <T> List<String> fieldsMapper(Class<T> clazz, List<String> fields) {
         if (fields == null) {
             fields = Arrays
-                    .stream(Profissional.class.getDeclaredFields())
+                    .stream(clazz.getDeclaredFields())
                     .map(field -> camelToSnakeCase(field.getName()))
                     .collect(Collectors.toList());
         }
