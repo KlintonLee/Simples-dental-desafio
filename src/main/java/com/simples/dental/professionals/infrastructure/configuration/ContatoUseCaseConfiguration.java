@@ -6,6 +6,8 @@ import com.simples.dental.professionals.application.contato.delete.DefaultDelete
 import com.simples.dental.professionals.application.contato.delete.DeleteContatoUseCase;
 import com.simples.dental.professionals.application.contato.retrieve.get.DefaultGetContatoByIdUseCase;
 import com.simples.dental.professionals.application.contato.retrieve.get.GetContatoByIdUseCase;
+import com.simples.dental.professionals.application.contato.retrieve.list.DefaultListContatosUseCase;
+import com.simples.dental.professionals.application.contato.retrieve.list.ListContatosUseCase;
 import com.simples.dental.professionals.application.contato.update.DefaultUpdateContatoUseCase;
 import com.simples.dental.professionals.application.contato.update.UpdateContatoUseCase;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
@@ -35,6 +37,11 @@ public class ContatoUseCaseConfiguration {
     @Bean
     public GetContatoByIdUseCase getContatoByIdUseCase() {
         return new DefaultGetContatoByIdUseCase(contatoGateway);
+    }
+
+    @Bean
+    public ListContatosUseCase listContatosUseCase() {
+        return new DefaultListContatosUseCase(contatoGateway);
     }
 
     @Bean
