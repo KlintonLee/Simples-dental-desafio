@@ -5,7 +5,7 @@ import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
-import com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers;
+import com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers;
 import com.simples.dental.professionals.infrastructure.profissional.persistence.ProfissionalJpaEntity;
 import com.simples.dental.professionals.infrastructure.profissional.persistence.ProfissionalJpaRepository;
 import jakarta.persistence.EntityManager;
@@ -47,7 +47,7 @@ public class ProfissionalPostgresGateway implements ProfissionalGateway {
     @Override
     public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
         final var ramItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
-        final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(
+        final var items = PersistenceHelpers.mapFieldsWithListOfStringArray(
                 aQuery.fields(),
                 ramItems
         );

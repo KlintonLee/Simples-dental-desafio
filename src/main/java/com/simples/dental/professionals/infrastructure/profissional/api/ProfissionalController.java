@@ -5,7 +5,7 @@ import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
-import com.simples.dental.professionals.infrastructure.configuration.ControllerHelpers;
+import com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalCommand;
 import com.simples.dental.professionals.application.profissional.create.CreateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.delete.DeleteProfissionalUseCase;

@@ -4,7 +4,7 @@ import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 import com.simples.dental.professionals.exceptions.UnprocessableFieldsException;
-import com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers;
+import com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ public class ListProfissionaisUseCaseTest {
         final var expectedItemsCount = 2;
 
         final List<String[]> repositoryOutput = List.of(rawItems1, rawItems2);
-        final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(fields, repositoryOutput);
+        final var items = PersistenceHelpers.mapFieldsWithListOfStringArray(fields, repositoryOutput);
         final var query = SearchQuery.with(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, "1", List.of("id", "nome", "cargo"));
         final var pagination = new Pagination<>(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, expectedItemsCount, items);
 

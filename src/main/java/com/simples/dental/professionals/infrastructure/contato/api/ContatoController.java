@@ -10,7 +10,7 @@ import com.simples.dental.professionals.application.contato.update.UpdateContato
 import com.simples.dental.professionals.domain.contato.Contato;
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
-import com.simples.dental.professionals.infrastructure.configuration.ControllerHelpers;
+import com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers;
 import com.simples.dental.professionals.infrastructure.contato.models.CreateContatoInput;
 import com.simples.dental.professionals.infrastructure.contato.models.ContatoResponse;
 import com.simples.dental.professionals.infrastructure.contato.models.UpdateContatoInput;

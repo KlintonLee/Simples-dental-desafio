@@ -1,11 +1,11 @@
-package com.simples.dental.professionals.infrastructure.configuration;
+package com.simples.dental.professionals.infrastructure.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DatabaseHelpers {
+public class PersistenceHelpers {
 
     public static List<String[]> mapObjectArrayToStringArray(List<Object[]> rawData) {
         List<String[]> result = new ArrayList<>();

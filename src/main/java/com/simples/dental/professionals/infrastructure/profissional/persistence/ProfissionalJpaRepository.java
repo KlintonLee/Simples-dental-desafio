@@ -5,7 +5,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import static com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers.mapObjectArrayToStringArray;
+import static com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers.mapObjectArrayToStringArray;
 
 public interface ProfissionalJpaRepository extends JpaRepository<ProfissionalJpaEntity, String> {
 

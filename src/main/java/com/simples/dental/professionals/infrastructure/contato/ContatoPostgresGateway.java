@@ -5,7 +5,7 @@ import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
-import com.simples.dental.professionals.infrastructure.configuration.DatabaseHelpers;
+import com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers;
 import com.simples.dental.professionals.infrastructure.contato.persistence.ContatoJpaEntity;
 import com.simples.dental.professionals.infrastructure.contato.persistence.ContatoJpaRepository;
 import jakarta.persistence.EntityManager;
@@ -45,7 +45,7 @@ public class ContatoPostgresGateway implements ContatoGateway {
     @Override
     public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
         final var rawItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
-        final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(
+        final var items = PersistenceHelpers.mapFieldsWithListOfStringArray(
                 aQuery.fields(),
                 rawItems
         );

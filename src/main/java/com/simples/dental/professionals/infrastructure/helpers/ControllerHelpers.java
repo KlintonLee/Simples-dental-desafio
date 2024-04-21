@@ -1,6 +1,4 @@
-package com.simples.dental.professionals.infrastructure.configuration;
-
-import com.simples.dental.professionals.domain.profissional.Profissional;
+package com.simples.dental.professionals.infrastructure.helpers;
 
 import java.util.Arrays;
 import java.util.List;
