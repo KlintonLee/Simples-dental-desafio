@@ -32,8 +32,8 @@ public class ListProfissionaisUseCaseTest {
     public void givenAValidQuery_whenCallsListProfissionais_thenShouldReturnProfissionaisPagination() {
         // Arrange
         final var fields = List.of("id", "nome", "cargo");
-        String[] rawItems1 = {"0f287198-d8a0-46fe-9a50-93de1f9722e6", "celular", "DEVELOPER"};
-        String[] rawItems2 = {"d999b945-742a-44c9-948f-1cd81b62abf0", "fixo", "TESTER"};
+        String[] rawItems1 = {"0f287198-d8a0-46fe-9a50-93de1f9722e6", "john", "DEVELOPER"};
+        String[] rawItems2 = {"d999b945-742a-44c9-948f-1cd81b62abf0", "maria", "TESTER"};
         final var expectedItemsCount = 2;
 
         final List<String[]> repositoryOutput = List.of(rawItems1, rawItems2);
@@ -57,7 +57,7 @@ public class ListProfissionaisUseCaseTest {
     @Test
     public void givenAnInvalidField_whenCallListProfissionais_thenShouldThrowUnprocessableFieldsException() {
         final var query = SearchQuery.with(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, "1", List.of("id", "invalid"));
-        final var expectedErrorMessage = "Os fields disponívels são: id, nome, cargo, nascimento, active.";
+        final var expectedErrorMessage = "Os fields disponívels são: id, nome, cargo, nascimento, active, created_date.";
 
         final var expectedException = assertThrows(UnprocessableFieldsException.class, () -> useCase.execute(query));
 
