@@ -44,10 +44,10 @@ public class ContatoPostgresGateway implements ContatoGateway {
 
     @Override
     public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
-        final var ramItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
+        final var rawItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
         final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(
                 aQuery.fields(),
-                ramItems
+                rawItems
         );
 
         return new Pagination<>(aQuery.page(), aQuery.perPage(), items.size(), items);
