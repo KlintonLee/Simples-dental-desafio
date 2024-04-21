@@ -31,14 +31,14 @@ public class ListProfissionaisUseCaseTest {
     @Test
     public void givenAValidQuery_whenCallsListProfissionais_thenShouldReturnProfissionaisPagination() {
         // Arrange
-        final var fields = List.of("id", "nome", "contato");
-        String[] rawItems1 = {"0f287198-d8a0-46fe-9a50-93de1f9722e6", "celular", "11999999999"};
-        String[] rawItems2 = {"d999b945-742a-44c9-948f-1cd81b62abf0", "fixo", "1188888888"};
+        final var fields = List.of("id", "nome", "cargo");
+        String[] rawItems1 = {"0f287198-d8a0-46fe-9a50-93de1f9722e6", "celular", "DEVELOPER"};
+        String[] rawItems2 = {"d999b945-742a-44c9-948f-1cd81b62abf0", "fixo", "TESTER"};
         final var expectedItemsCount = 2;
 
         final List<String[]> repositoryOutput = List.of(rawItems1, rawItems2);
         final var items = DatabaseHelpers.mapFieldsWithListOfStringArray(fields, repositoryOutput);
-        final var query = SearchQuery.with(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, "1", List.of("id", "nome", "contato"));
+        final var query = SearchQuery.with(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, "1", List.of("id", "nome", "cargo"));
         final var pagination = new Pagination<>(EXPECTED_QUERY_PAGE, EXPECTED_QUERY_PER_PAGE, expectedItemsCount, items);
 
         when(profissionalGateway.findAll(query)).thenReturn(pagination);
