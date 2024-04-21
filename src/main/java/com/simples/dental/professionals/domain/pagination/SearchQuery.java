@@ -1,7 +1,10 @@
 package com.simples.dental.professionals.domain.pagination;
 
+import lombok.With;
+
 import java.util.List;
 
+@With
 public record SearchQuery(
         int page,
         int perPage,
