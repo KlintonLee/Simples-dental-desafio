@@ -54,7 +54,7 @@ atinge um volume considerável, onde a paginação se torna importante para otim
 Além disso, os demais parâmetros permitem consultas mais precisas, como a busca por uma string
 específica e/ou a seleção de apenas alguns atributos. Essa redução do tráfego de dados na rede,
 aliada à paginação, resulta em uma melhoria significativa na performance das listagens.
-- `page` - o número da página a ser consultada (página inicial no índice 0);
+- `page` - o número da página a ser consultada;
 - `perPage` - quantos objetos retornados por página;
 - `q` - o caracter que deverá estar contigo nos seguintes atributos:
   - profissionais - nome e cargo

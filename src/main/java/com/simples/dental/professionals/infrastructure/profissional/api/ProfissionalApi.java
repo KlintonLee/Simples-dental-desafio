@@ -51,7 +51,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor"),
     })
     Pagination<Map<String, String>> listProfissionais(
-            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "page", required = false, defaultValue = "1") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
             @RequestParam(name = "q", required = false, defaultValue = "") final String q,
             @RequestParam(name = "fields", required = false) final List<String> fields

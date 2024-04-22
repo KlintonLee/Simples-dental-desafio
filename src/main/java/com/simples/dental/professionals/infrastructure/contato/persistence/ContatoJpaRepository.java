@@ -29,8 +29,7 @@ public interface ContatoJpaRepository extends JpaRepository<ContatoJpaEntity, St
         Query nativeQuery = entityManager.createNativeQuery(queryString);
         nativeQuery.setParameter("q", "%" + q + "%");
         nativeQuery.setMaxResults(perPage);
-        nativeQuery.setFirstResult(page * perPage);
-        nativeQuery.setFirstResult(page * perPage);
+        nativeQuery.setFirstResult((page - 1) * perPage);
 
         final List<Object[]> rawData = nativeQuery.getResultList();
         return mapObjectArrayToStringArray(rawData);
