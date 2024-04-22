@@ -46,7 +46,7 @@ public class ProfissionalPostgresGateway implements ProfissionalGateway {
 
     @Override
     public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
-        final var ramItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
+        final var ramItems = repository.selectByFields(entityManager, aQuery);
         final var items = PersistenceHelpers.mapFieldsWithListOfStringArray(
                 aQuery.fields(),
                 ramItems

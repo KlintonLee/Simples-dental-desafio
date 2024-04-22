@@ -44,7 +44,7 @@ public class ContatoPostgresGateway implements ContatoGateway {
 
     @Override
     public Pagination<Map<String, String>> findAll(SearchQuery aQuery) {
-        final var rawItems = repository.selectByFields(entityManager, aQuery.fields(), aQuery.q());
+        final var rawItems = repository.selectByFields(entityManager, aQuery);
         final var items = PersistenceHelpers.mapFieldsWithListOfStringArray(
                 aQuery.fields(),
                 rawItems
