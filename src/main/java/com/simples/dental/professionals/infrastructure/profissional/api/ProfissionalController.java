@@ -14,6 +14,7 @@ import com.simples.dental.professionals.application.profissional.update.UpdatePr
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
 import com.simples.dental.professionals.domain.profissional.CargoProfissional;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateProfissionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalContatosResponse;
 import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalResponse;
 import com.simples.dental.professionals.infrastructure.profissional.models.UpdateProfissionalInput;
 import com.simples.dental.professionals.infrastructure.profissional.presenters.ProfissionalPresenter;
@@ -68,7 +69,7 @@ public class ProfissionalController implements ProfissionalApi {
     }
 
     @Override
-    public ProfissionalResponse getById(String id) {
+    public ProfissionalContatosResponse getById(String id) {
         return ProfissionalPresenter.present(getByIdUseCase.execute(id));
     }
 

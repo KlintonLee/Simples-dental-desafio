@@ -2,6 +2,7 @@ package com.simples.dental.professionals.infrastructure.profissional.api;
 
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.infrastructure.profissional.models.CreateProfissionalInput;
+import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalContatosResponse;
 import com.simples.dental.professionals.infrastructure.profissional.models.ProfissionalResponse;
 import com.simples.dental.professionals.infrastructure.profissional.models.UpdateProfissionalInput;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,7 +42,7 @@ public interface ProfissionalApi {
             @ApiResponse(responseCode = "404", description = "Profisional não localizado"),
             @ApiResponse(responseCode = "500", description = "Um erro inexperado ocorreu no servidor")
     })
-    ProfissionalResponse getById(@PathVariable String id);
+    ProfissionalContatosResponse getById(@PathVariable String id);
 
     @GetMapping
     @Operation(summary = "Lista todos profissionais paginado")

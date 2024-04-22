@@ -10,6 +10,7 @@ import com.simples.dental.professionals.application.profissional.retrieve.list.D
 import com.simples.dental.professionals.application.profissional.retrieve.list.ListProfissionaisUseCase;
 import com.simples.dental.professionals.application.profissional.update.DefaultUpdateProfissionalUseCase;
 import com.simples.dental.professionals.application.profissional.update.UpdateProfissionalUseCase;
+import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +22,11 @@ public class ProfissionalUseCaseConfiguration {
 
     private final ProfissionalGateway profissionalGateway;
 
-    public ProfissionalUseCaseConfiguration(ProfissionalGateway profissionalGateway) {
+    private final ContatoGateway contatoGateway;
+
+    public ProfissionalUseCaseConfiguration(ProfissionalGateway profissionalGateway, ContatoGateway contatoGateway) {
         this.profissionalGateway = Objects.requireNonNull(profissionalGateway);
+        this.contatoGateway = Objects.requireNonNull(contatoGateway);
     }
 
     @Bean
@@ -32,7 +36,7 @@ public class ProfissionalUseCaseConfiguration {
 
     @Bean
     public GetProfissionalByIdUseCase getProfissionalByIdUseCase() {
-        return new DefaultGetProfissionalByIdUseCase(profissionalGateway);
+        return new DefaultGetProfissionalByIdUseCase(profissionalGateway, contatoGateway);
     }
 
     @Bean
