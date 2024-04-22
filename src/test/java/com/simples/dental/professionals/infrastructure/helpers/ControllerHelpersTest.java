@@ -1,5 +1,6 @@
 package com.simples.dental.professionals.infrastructure.helpers;
 
+import com.simples.dental.professionals.domain.exceptions.InvalidPaginationValuesException;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
@@ -51,5 +52,46 @@ public class ControllerHelpersTest {
 
         assertTrue(actualFields.contains("id"));
         assertTrue(actualFields.contains("nome"));
+    }
+
+    @Test
+    public void givenValidPageAndPerPage_whenCallValidatePaginationValues_thenShouldBeOk() {
+        final var page = 1;
+        final var perPage = 10;
+
+        assertDoesNotThrow(() -> validatePaginationValues(page, perPage));
+    }
+
+    @Test
+    public void givenThePageAsZero_whenCallValidatePaginationValues_thenShouldThrowInvalidPaginationValuesException() {
+        final var page = 0;
+        final var perPage = 10;
+        final var expectedErrorMessage = "A página não pode ser zero ou negativo";
+
+        final var exception = assertThrows(InvalidPaginationValuesException.class, () -> validatePaginationValues(page, perPage));
+
+        assertEquals(expectedErrorMessage, exception.getMessage());
+    }
+
+    @Test
+    public void givenThePageAsNegative_whenCallValidatePaginationValues_thenShouldThrowInvalidPaginationValuesException() {
+        final var page = -1;
+        final var perPage = 10;
+        final var expectedErrorMessage = "A página não pode ser zero ou negativo";
+
+        final var exception = assertThrows(InvalidPaginationValuesException.class, () -> validatePaginationValues(page, perPage));
+
+        assertEquals(expectedErrorMessage, exception.getMessage());
+    }
+
+    @Test
+    public void givenThePerPageAsNegative_whenCallValidatePaginationValues_thenShouldThrowInvalidPaginationValuesException() {
+        final var page = 1;
+        final var perPage = -1;
+        final var expectedErrorMessage = "Os resultados por página não deve ser negativo";
+
+        final var exception = assertThrows(InvalidPaginationValuesException.class, () -> validatePaginationValues(page, perPage));
+
+        assertEquals(expectedErrorMessage, exception.getMessage());
     }
 }
