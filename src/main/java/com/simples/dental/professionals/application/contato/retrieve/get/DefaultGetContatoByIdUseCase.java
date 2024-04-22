@@ -1,12 +1,13 @@
 package com.simples.dental.professionals.application.contato.retrieve.get;
 
 import com.simples.dental.professionals.application.contato.ContatoOutput;
+import com.simples.dental.professionals.domain.contato.Contato;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
-import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+
+import static com.simples.dental.professionals.application.Helpers.notFound;
 
 public class DefaultGetContatoByIdUseCase extends GetContatoByIdUseCase {
 
@@ -22,12 +23,8 @@ public class DefaultGetContatoByIdUseCase extends GetContatoByIdUseCase {
 
         final var contato = contatoGateway
                 .findById(contatoId)
-                .orElseThrow(notFound(id));
+                .orElseThrow(notFound(Contato.class, id));
 
         return ContatoOutput.from(contato);
-    }
-
-    private static Supplier<NotFoundException> notFound(String id) {
-        return () -> new NotFoundException("Contato com ID %s não foi encontrado".formatted(id));
     }
 }

@@ -1,5 +1,6 @@
 package com.simples.dental.professionals.application;
 
+import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.exceptions.UnprocessableFieldsException;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Helpers {
 
@@ -34,5 +36,9 @@ public class Helpers {
         return field -> field.getName()
                 .replaceAll("([a-z])([A-Z])", "$1_$2")
                 .toLowerCase();
+    }
+
+    public static <T> Supplier<NotFoundException> notFound(Class<T> clazz, String id) {
+        return () -> new NotFoundException("%s com ID %s não foi encontrado".formatted(clazz.getSimpleName(), id));
     }
 }

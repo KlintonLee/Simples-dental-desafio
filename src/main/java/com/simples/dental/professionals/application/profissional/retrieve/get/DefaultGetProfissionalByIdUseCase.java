@@ -1,12 +1,13 @@
 package com.simples.dental.professionals.application.profissional.retrieve.get;
 
-import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
+import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+
+import static com.simples.dental.professionals.application.Helpers.notFound;
 
 public class DefaultGetProfissionalByIdUseCase extends GetProfissionalByIdUseCase {
 
@@ -16,18 +17,13 @@ public class DefaultGetProfissionalByIdUseCase extends GetProfissionalByIdUseCas
         this.profissionalGateway = Objects.requireNonNull(profissionalGateway);
     }
 
-
     @Override
     public ProfissionalOutput execute(String id) {
         final var profissionalId = IdProfissional.from(id);
         final var profissional = profissionalGateway
                 .findById(profissionalId)
-                .orElseThrow(notFound(id));
+                .orElseThrow(notFound(Profissional.class, id));
 
         return ProfissionalOutput.with(profissional);
-    }
-
-    private static Supplier<NotFoundException> notFound(String id) {
-        return () -> new NotFoundException("Profissional com ID %s não foi encontrado".formatted(id));
     }
 }

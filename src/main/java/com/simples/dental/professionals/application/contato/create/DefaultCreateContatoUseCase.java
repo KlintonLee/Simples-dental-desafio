@@ -6,10 +6,10 @@ import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
-import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 
 import java.util.Objects;
-import java.util.function.Supplier;
+
+import static com.simples.dental.professionals.application.Helpers.notFound;
 
 public class DefaultCreateContatoUseCase extends CreateContatoUseCase {
 
@@ -33,9 +33,5 @@ public class DefaultCreateContatoUseCase extends CreateContatoUseCase {
                 .newContato(command.nome(), command.contato(), profissional);
         contato.validate();
         return ContatoOutput.from(this.contatoGateway.create(contato));
-    }
-
-    private static Supplier<NotFoundException> notFound(Class<?> clazz, String id) {
-        return () -> new NotFoundException("%s com ID %s não foi encontrado".formatted(clazz.getSimpleName(), id));
     }
 }
