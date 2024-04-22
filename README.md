@@ -15,6 +15,19 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 - Spring Boot (para desenvolvimento da API REST)
 - Banco de dados Postgres (para armazenamento dos dados)
 
+## Ferramentas necessárias
+- Docker
+- Docker compose
+- Java 17+
+- Maven
+
+## Rodar aplicação
+- Baixe o projeto e acessar o projeto pelo terminal
+- Execute o build da aplicação
+  - `mvn clean install`
+- Execute a aplicação
+  - `java -jar target/<nome_do_arquivo_jar>`
+
 ## Estrutura do Banco de Dados
 - Tabela contatos
   - id: Identificador único do contato (gerado automaticamente pelo banco de dados).
@@ -30,6 +43,23 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 
 ## Endpoints
 Ao subir a aplicação, o swagger-ui estará disponível em http://localhost:8080/swagger-ui/index.html
+
+### Explicando um pouco sobre a operação listagem
+A operação oferece recursos de paginação e consultas customizadas. A motivação é para quando a tabela
+atinge um volume considerável, onde a paginação se torna importante para otimizar consultas pontuais.
+
+Além disso, os demais parâmetros permitem consultas mais precisas, como a busca por uma string
+específica e/ou a seleção de apenas alguns atributos. Essa redução do tráfego de dados na rede,
+aliada à paginação, resulta em uma melhoria significativa na performance das listagens.
+- `page` - o número da página a ser consultada (página inicial no índice 0);
+- `perPage` - quantos objetos retornados por página;
+- `q` - o caracter que deverá estar contigo nos seguintes atributos:
+  - profissionais - nome e cargo
+  - contatos - nome e contato
+- `fields` - apenas os campos que deseja consultar:
+  - profissionais - nome, cargo, nascimento, active, created_date
+  - contatos - nome, contato, profissional e created_date
+  - Obs: O campo ID não é necessário pois ela é retornada em toda consulta.
 
 ## Como Contribuir
 Faça um fork do repositório.
