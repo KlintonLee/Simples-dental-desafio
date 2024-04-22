@@ -18,7 +18,7 @@ public class DefaultCreateProfissionalUseCase extends CreateProfissionalUseCase 
     @Override
     public ProfissionalOutput execute(CreateProfissionalCommand command) {
         final var profissional = Profissional.newProfissional(command.name(), command.cargo(), command.nascimento());
-
+        profissional.validate();
         return ProfissionalOutput.with(this.profissionalGateway.create(profissional));
     }
 }

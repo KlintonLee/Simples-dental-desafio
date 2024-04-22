@@ -78,7 +78,7 @@ public class Profissional extends AggregateRoot<IdProfissional> {
 
     @Override
     public void validate() {
-
+        new ProfissionalValidator(this).validate();
     }
 
     public Profissional deactivate() {
