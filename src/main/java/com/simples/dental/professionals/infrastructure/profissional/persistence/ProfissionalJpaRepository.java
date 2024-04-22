@@ -20,11 +20,11 @@ public interface ProfissionalJpaRepository extends JpaRepository<ProfissionalJpa
                 SELECT
                   %s
                 FROM
-                  profissionais c
+                  profissionais p
                 WHERE
-                  c.nome LIKE :q
-                  OR c.cargo LIKE :q
-                  AND c.active = TRUE
+                  (LOWER(p.nome) LIKE LOWER(:q)
+                  OR LOWER(p.cargo) LIKE LOWER(:q))
+                  AND p.active = TRUE
                 """.formatted(String.join(", ", fields));
 
         Query nativeQuery = entityManager.createNativeQuery(queryString);

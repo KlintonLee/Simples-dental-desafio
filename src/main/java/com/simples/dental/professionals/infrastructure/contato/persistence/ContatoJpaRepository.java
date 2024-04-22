@@ -22,14 +22,15 @@ public interface ContatoJpaRepository extends JpaRepository<ContatoJpaEntity, St
                 FROM
                   contatos c
                 WHERE
-                  c.nome LIKE :q
+                  LOWER(c.nome) LIKE LOWER(:q)
                   OR c.contato LIKE :q
                 """.formatted(String.join(", ", fields));
 
         Query nativeQuery = entityManager.createNativeQuery(queryString);
         nativeQuery.setParameter("q", "%" + q + "%");
         nativeQuery.setMaxResults(perPage);
-        nativeQuery.setFirstResult((page - 1) * perPage);
+        nativeQuery.setFirstResult(page * perPage);
+        nativeQuery.setFirstResult(page * perPage);
 
         final List<Object[]> rawData = nativeQuery.getResultList();
         return mapObjectArrayToStringArray(rawData);
