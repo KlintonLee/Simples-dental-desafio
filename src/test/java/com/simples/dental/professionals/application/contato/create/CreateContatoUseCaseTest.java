@@ -5,6 +5,7 @@ import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
 import com.simples.dental.professionals.exceptions.NotFoundException;
+import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -70,6 +71,48 @@ public class CreateContatoUseCaseTest {
         final var expectedErrorMessage = "Profissional com ID 123 não foi encontrado";
 
         final var actualException = assertThrows(NotFoundException.class, () -> useCase.execute(command));
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+        verify(contatoGateway, times(0)).create(any());
+    }
+
+    @Test
+    public void givenAnInvalidNullName_whenCallCreationUseCase_thenThrowUnprocessableEntityException() {
+        final var expectedProfissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedProfissionalId = expectedProfissional.getId();
+        final var command = CreateContatoCommand.with(null, EXPECTED_CONTATO, expectedProfissionalId.getValue());
+        final var expectedErrorMessage = "O 'nome' do contato não pode ser nulo ou vazio";
+        when(profissionalGateway.findById(expectedProfissionalId)).thenReturn(Optional.of(expectedProfissional));
+
+        final var actualException = assertThrows(UnprocessableEntityException.class, () -> useCase.execute(command));
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+        verify(contatoGateway, times(0)).create(any());
+    }
+
+    @Test
+    public void givenAnInvalidEmptyName_whenCallCreationUseCase_thenThrowUnprocessableEntityException() {
+        final var expectedProfissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedProfissionalId = expectedProfissional.getId();
+        final var command = CreateContatoCommand.with(" ", EXPECTED_CONTATO, expectedProfissionalId.getValue());
+        final var expectedErrorMessage = "O 'nome' do contato não pode ser nulo ou vazio";
+        when(profissionalGateway.findById(expectedProfissionalId)).thenReturn(Optional.of(expectedProfissional));
+
+        final var actualException = assertThrows(UnprocessableEntityException.class, () -> useCase.execute(command));
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+        verify(contatoGateway, times(0)).create(any());
+    }
+
+    @Test
+    public void givenAnInvalidLongName_whenCallCreationUseCase_thenThrowUnprocessableEntityException() {
+        final var expectedProfissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedProfissionalId = expectedProfissional.getId();
+        final var command = CreateContatoCommand.with("a".repeat(256), EXPECTED_CONTATO, expectedProfissionalId.getValue());
+        final var expectedErrorMessage = "O 'nome' não deve ser maior do que 255";
+        when(profissionalGateway.findById(expectedProfissionalId)).thenReturn(Optional.of(expectedProfissional));
+
+        final var actualException = assertThrows(UnprocessableEntityException.class, () -> useCase.execute(command));
 
         assertEquals(expectedErrorMessage, actualException.getMessage());
         verify(contatoGateway, times(0)).create(any());
