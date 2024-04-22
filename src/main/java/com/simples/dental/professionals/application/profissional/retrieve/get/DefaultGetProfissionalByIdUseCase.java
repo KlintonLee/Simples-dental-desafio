@@ -1,6 +1,7 @@
 package com.simples.dental.professionals.application.profissional.retrieve.get;
 
 import com.simples.dental.professionals.application.profissional.ProfissionalOutput;
+import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
@@ -13,17 +14,22 @@ public class DefaultGetProfissionalByIdUseCase extends GetProfissionalByIdUseCas
 
     private final ProfissionalGateway profissionalGateway;
 
-    public DefaultGetProfissionalByIdUseCase(ProfissionalGateway profissionalGateway) {
+    private final ContatoGateway contatoGateway;
+
+    public DefaultGetProfissionalByIdUseCase(ProfissionalGateway profissionalGateway, ContatoGateway contatoGateway) {
         this.profissionalGateway = Objects.requireNonNull(profissionalGateway);
+        this.contatoGateway = Objects.requireNonNull(contatoGateway);
     }
 
     @Override
-    public ProfissionalOutput execute(String id) {
+    public ProfissionalWithContactsOutput execute(String id) {
         final var profissionalId = IdProfissional.from(id);
         final var profissional = profissionalGateway
                 .findById(profissionalId)
                 .orElseThrow(notFound(Profissional.class, id));
 
-        return ProfissionalOutput.with(profissional);
+        final var contatos = this.contatoGateway.findAllByProfissional(profissionalId);
+
+        return ProfissionalWithContactsOutput.with(profissional, contatos);
     }
 }
