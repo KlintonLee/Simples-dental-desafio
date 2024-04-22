@@ -23,6 +23,9 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 
 ## Rodar aplicação
 - Baixe o projeto e acessar o projeto pelo terminal
+- Com o docker em execução, execute o docker compose
+  - `docker-compose up -d`
+  - `docker compose up -d` (para macos)
 - Execute o build da aplicação
   - `mvn clean install`
 - Execute a aplicação
