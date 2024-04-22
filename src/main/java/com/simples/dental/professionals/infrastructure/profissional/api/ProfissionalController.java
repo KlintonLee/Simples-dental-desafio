@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+import static com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers.formatDate;
+
 @RestController
 public class ProfissionalController implements ProfissionalApi {
 
@@ -56,7 +58,8 @@ public class ProfissionalController implements ProfissionalApi {
     @Override
     public ResponseEntity<ProfissionalResponse> createProfissional(CreateProfissionalInput input) {
         final var cargo = serializeCargo(input.cargo());
-        final var command = CreateProfissionalCommand.with(input.nome(), cargo, input.nascimento());
+        final var nascimento = formatDate(input.nascimento());
+        final var command = CreateProfissionalCommand.with(input.nome(), cargo, nascimento);
 
         final var profissional = createUseCase.execute(command);
         final var profissionalResponse = ProfissionalPresenter.present(profissional);
@@ -78,7 +81,8 @@ public class ProfissionalController implements ProfissionalApi {
     @Override
     public ResponseEntity<ProfissionalResponse> updateProfissional(String id, UpdateProfissionalInput input) {
         final var cargo = serializeCargo(input.cargo());
-        final var command = UpdateProfissionalCommand.with(id, input.nome(), cargo, input.nascimento());
+        final var nascimento = formatDate(input.nascimento());
+        final var command = UpdateProfissionalCommand.with(id, input.nome(), cargo, nascimento);
 
         final var profissional = updateUseCase.execute(command);
         return ResponseEntity.ok(ProfissionalPresenter.present(profissional));
