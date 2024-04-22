@@ -29,9 +29,9 @@ public class DefaultCreateContatoUseCase extends CreateContatoUseCase {
                 .findById(profissionalId)
                 .orElseThrow(notFound(Profissional.class, command.profissionalId()));
 
-
         final var contato = Contato
                 .newContato(command.nome(), command.contato(), profissional);
+        contato.validate();
         return ContatoOutput.from(this.contatoGateway.create(contato));
     }
 

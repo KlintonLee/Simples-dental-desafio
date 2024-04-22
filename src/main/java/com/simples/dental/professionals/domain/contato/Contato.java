@@ -70,6 +70,6 @@ public class Contato extends AggregateRoot<ContatoId> {
 
     @Override
     public void validate() {
-
+        new ContatoValidator(this).validate();
     }
 }
