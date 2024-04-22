@@ -1,7 +1,6 @@
 package com.simples.dental.professionals.domain.profissional;
 
 import com.simples.dental.professionals.domain.AggregateRoot;
-import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -78,7 +77,7 @@ public class Profissional extends AggregateRoot<IdProfissional> {
     }
 
     @Override
-    public void validate(ValidationHandler handler) {
+    public void validate() {
 
     }
 

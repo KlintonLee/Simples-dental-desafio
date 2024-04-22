@@ -1,6 +1,5 @@
 package com.simples.dental.professionals.domain;
 
-import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -18,5 +17,5 @@ public abstract class Entity<ID extends Identifier> {
         this.id = id;
     }
 
-    public abstract void validate(ValidationHandler handler);
+    public abstract void validate();
 }

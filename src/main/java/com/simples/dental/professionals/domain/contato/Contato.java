@@ -2,9 +2,7 @@ package com.simples.dental.professionals.domain.contato;
 
 import com.simples.dental.professionals.domain.AggregateRoot;
 import com.simples.dental.professionals.domain.profissional.Profissional;
-import com.simples.dental.professionals.domain.validations.ValidationHandler;
 import lombok.Getter;
-import lombok.With;
 
 import java.time.LocalDate;
 
@@ -71,7 +69,7 @@ public class Contato extends AggregateRoot<ContatoId> {
     }
 
     @Override
-    public void validate(ValidationHandler handler) {
+    public void validate() {
 
     }
 }
