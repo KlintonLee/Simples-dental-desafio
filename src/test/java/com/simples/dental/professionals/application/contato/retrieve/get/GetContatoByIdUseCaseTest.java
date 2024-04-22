@@ -4,7 +4,7 @@ import com.simples.dental.professionals.domain.contato.Contato;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
 import com.simples.dental.professionals.domain.profissional.Profissional;
-import com.simples.dental.professionals.exceptions.NotFoundException;
+import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

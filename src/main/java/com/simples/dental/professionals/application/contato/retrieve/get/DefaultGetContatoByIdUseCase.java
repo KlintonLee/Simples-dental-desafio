@@ -3,7 +3,7 @@ package com.simples.dental.professionals.application.contato.retrieve.get;
 import com.simples.dental.professionals.application.contato.ContatoOutput;
 import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
-import com.simples.dental.professionals.exceptions.NotFoundException;
+import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 
 import java.util.Objects;
 import java.util.function.Supplier;

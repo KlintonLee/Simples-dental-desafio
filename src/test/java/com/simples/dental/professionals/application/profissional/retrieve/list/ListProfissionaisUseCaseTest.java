@@ -3,7 +3,7 @@ package com.simples.dental.professionals.application.profissional.retrieve.list;
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
-import com.simples.dental.professionals.exceptions.UnprocessableFieldsException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableFieldsException;
 import com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

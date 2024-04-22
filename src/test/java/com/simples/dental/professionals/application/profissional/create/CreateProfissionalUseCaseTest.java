@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.application.profissional.create;
 
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
-import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

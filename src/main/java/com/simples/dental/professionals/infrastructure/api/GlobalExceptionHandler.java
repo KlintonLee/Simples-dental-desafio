@@ -1,9 +1,9 @@
 package com.simples.dental.professionals.infrastructure.api;
 
-import com.simples.dental.professionals.exceptions.NoStackTraceException;
-import com.simples.dental.professionals.exceptions.NotFoundException;
-import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
-import com.simples.dental.professionals.exceptions.UnprocessableFieldsException;
+import com.simples.dental.professionals.domain.exceptions.NoStackTraceException;
+import com.simples.dental.professionals.domain.exceptions.NotFoundException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableFieldsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

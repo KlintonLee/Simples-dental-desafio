@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.application;
 
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
-import com.simples.dental.professionals.exceptions.UnprocessableFieldsException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableFieldsException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

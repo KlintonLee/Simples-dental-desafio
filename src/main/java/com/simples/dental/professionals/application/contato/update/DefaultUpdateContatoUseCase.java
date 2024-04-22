@@ -7,7 +7,7 @@ import com.simples.dental.professionals.domain.contato.ContatoId;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
 import com.simples.dental.professionals.domain.profissional.ProfissionalGateway;
-import com.simples.dental.professionals.exceptions.NotFoundException;
+import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 
 import java.util.Objects;
 import java.util.function.Supplier;

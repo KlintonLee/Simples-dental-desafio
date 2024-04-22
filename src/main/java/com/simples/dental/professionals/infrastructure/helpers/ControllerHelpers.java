@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.infrastructure.helpers;
 
-import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

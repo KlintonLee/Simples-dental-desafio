@@ -1,6 +1,6 @@
 package com.simples.dental.professionals.domain.profissional;
 
-import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package com.simples.dental.professionals.domain.contato;
 
 import com.simples.dental.professionals.domain.profissional.Profissional;
-import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
 
 import static com.simples.dental.professionals.UtilsConfigTest.*;

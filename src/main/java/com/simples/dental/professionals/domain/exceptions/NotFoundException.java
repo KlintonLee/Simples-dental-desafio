@@ -1,4 +1,4 @@
-package com.simples.dental.professionals.exceptions;
+package com.simples.dental.professionals.domain.exceptions;
 
 public class NotFoundException extends NoStackTraceException {
 
