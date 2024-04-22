@@ -22,13 +22,13 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 - Maven
 
 ## Rodar aplicação
-- Baixe o projeto e acessar o projeto pelo terminal
-- Com o docker em execução, execute o docker compose
+- Baixar e acessar o projeto pelo terminal
+- Com o docker em execução, executar o docker compose
   - `docker-compose up -d`
   - `docker compose up -d` (para macos)
-- Execute o build da aplicação
+- Executar o build da aplicação
   - `mvn clean install`
-- Execute a aplicação
+- Executar a aplicação
   - `java -jar target/<nome_do_arquivo_jar>`
 
 ## Estrutura do Banco de Dados
