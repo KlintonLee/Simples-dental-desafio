@@ -1,11 +1,11 @@
 package com.simples.dental.professionals.domain.profissional;
 
+import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProfissionalTest {
 
@@ -43,5 +43,41 @@ public class ProfissionalTest {
         assertEquals(EXPECTED_NASCIMENTO, professional.getNascimento());
         assertEquals(expectedActive, professional.isActive());
         assertNotNull(professional.getCreatedDate());
+    }
+
+    @Test
+    public void givenAnInvalidParams_whenCallNewProfissionalWithNullName_thenShouldThrownAnUnprocessableEntityException() {
+        final var professional = Profissional.newProfissional(null, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedErrorMessage = "O 'nome' do contato não pode ser nulo ou vazio";
+
+        final var actualException = assertThrows(
+                UnprocessableEntityException.class,
+                professional::validate);
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+    }
+
+    @Test
+    public void givenAnInvalidParams_whenCallNewProfissionalWithEmptyName_thenShouldThrownAnUnprocessableEntityException() {
+        final var professional = Profissional.newProfissional(" ", EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedErrorMessage = "O 'nome' do contato não pode ser nulo ou vazio";
+
+        final var actualException = assertThrows(
+                UnprocessableEntityException.class,
+                professional::validate);
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
+    }
+
+    @Test
+    public void givenAnInvalidParams_whenCallNewProfissionalWithNameGreatherThan255_thenShouldThrownAnUnprocessableEntityException() {
+        final var longName = "a".repeat(256);
+        final var professional = Profissional.newProfissional(longName, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
+        final var expectedErrorMessage = "O 'nome' não deve ser maior do que 255";
+        final var actualException = assertThrows(
+                UnprocessableEntityException.class,
+                professional::validate);
+
+        assertEquals(expectedErrorMessage, actualException.getMessage());
     }
 }
