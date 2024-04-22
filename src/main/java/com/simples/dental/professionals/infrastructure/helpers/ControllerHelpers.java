@@ -1,5 +1,6 @@
 package com.simples.dental.professionals.infrastructure.helpers;
 
+import com.simples.dental.professionals.domain.exceptions.InvalidPaginationValuesException;
 import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
 
 import java.time.LocalDate;
@@ -37,4 +38,12 @@ public class ControllerHelpers {
         return camelCase.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
     }
 
+    public static void validatePaginationValues(int page, int perPage) {
+        if (page <= 0) {
+            throw new InvalidPaginationValuesException("A página não pode ser zero ou negativo");
+        }
+        if (perPage < 0) {
+            throw new InvalidPaginationValuesException("Os resultados por página não deve ser negativo");
+        }
+    }
 }

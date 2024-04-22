@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers.validatePaginationValues;
+
 @RestController
 public class ContatoController implements ContatoApi {
 
@@ -66,6 +68,7 @@ public class ContatoController implements ContatoApi {
 
     @Override
     public Pagination<Map<String, String>> listContatos(int page, int perPage, String q, List<String> fields) {
+        validatePaginationValues(page, perPage);
         fields = ControllerHelpers.fieldsMapper(Contato.class, fields);
         final var query = SearchQuery.with(page, perPage, q, fields);
         return listContatosUseCase.execute(query);

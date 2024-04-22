@@ -1,9 +1,6 @@
 package com.simples.dental.professionals.infrastructure.api;
 
-import com.simples.dental.professionals.domain.exceptions.NoStackTraceException;
-import com.simples.dental.professionals.domain.exceptions.NotFoundException;
-import com.simples.dental.professionals.domain.exceptions.UnprocessableEntityException;
-import com.simples.dental.professionals.domain.exceptions.UnprocessableFieldsException;
+import com.simples.dental.professionals.domain.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleNotFoundException(final NotFoundException ex) {
         log.error("GlobalExceptionHandler.java - NotFoundException - " + ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.from(ex));
+    }
+
+    @ExceptionHandler(InvalidPaginationValuesException.class)
+    public ResponseEntity<?> handleInvalidPaginationValuesException(final InvalidPaginationValuesException ex) {
+        log.error("GlobalExceptionHandler.java - InvalidPaginationValuesException - " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiError.from(ex));
     }
 
     record ApiError(String message) {

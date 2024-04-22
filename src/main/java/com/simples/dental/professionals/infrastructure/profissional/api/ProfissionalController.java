@@ -27,6 +27,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers.formatDate;
+import static com.simples.dental.professionals.infrastructure.helpers.ControllerHelpers.validatePaginationValues;
 
 @RestController
 public class ProfissionalController implements ProfissionalApi {
@@ -73,6 +74,7 @@ public class ProfissionalController implements ProfissionalApi {
 
     @Override
     public Pagination<Map<String, String>> listProfissionais(int page, int perPage, String q, List<String> fields) {
+        validatePaginationValues(page, perPage);
         fields = ControllerHelpers.fieldsMapper(Profissional.class, fields);
         final var query = SearchQuery.with(page, perPage, q, fields);
         return listUseCase.execute(query);
