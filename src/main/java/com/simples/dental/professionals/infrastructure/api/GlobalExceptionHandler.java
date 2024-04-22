@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnprocessableFieldsException.class)
     public ResponseEntity<?> handleUnprocessableFieldsException(final UnprocessableFieldsException ex) {
         log.error("GlobalExceptionHandler.java - UnprocessableFieldsException - " + ex.getMessage());
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(ApiError.from(ex));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiError.from(ex));
     }
 
     @ExceptionHandler(NotFoundException.class)
