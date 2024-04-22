@@ -1,5 +1,7 @@
 package com.simples.dental.professionals.application.profissional.retrieve.get;
 
+import com.simples.dental.professionals.domain.contato.Contato;
+import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.exceptions.NotFoundException;
 import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.domain.profissional.Profissional;
@@ -10,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.simples.dental.professionals.UtilsConfigTest.*;
@@ -25,11 +28,16 @@ public class GetProfissionalByIdUseCaseTest {
     @Mock
     private ProfissionalGateway profissionalGateway;
 
+    @Mock
+    private ContatoGateway contatoGateway;
+
     @Test
     public void givenAValidProfissionalId_whenCallGetById_thenShouldReturnProfissionalData() {
         final var profissional = Profissional.newProfissional(EXPECTED_PROFISSIONAL_NOME, EXPECTED_CARGO, EXPECTED_NASCIMENTO);
         final var profissionalId = profissional.getId();
+        final var expectedContatos = List.of(Contato.newContato(EXPECTED_CONTATO_NOME, EXPECTED_CONTATO, profissional));
         when(profissionalGateway.findById(profissionalId)).thenReturn(Optional.of(profissional));
+        when(contatoGateway.findAllByProfissional(profissionalId)).thenReturn(expectedContatos);
 
         final var actualOutput = useCase.execute(profissionalId.getValue());
 
@@ -38,6 +46,7 @@ public class GetProfissionalByIdUseCaseTest {
         assertEquals(EXPECTED_PROFISSIONAL_NOME, actualOutput.nome());
         assertEquals(EXPECTED_CARGO, actualOutput.cargo());
         assertEquals(EXPECTED_NASCIMENTO, actualOutput.nascimento());
+        assertEquals(expectedContatos, actualOutput.contatos());
         assertTrue(actualOutput.active());
         assertNotNull(actualOutput.createdDate());
     }
