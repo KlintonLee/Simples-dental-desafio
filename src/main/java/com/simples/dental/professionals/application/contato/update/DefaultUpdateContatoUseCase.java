@@ -47,13 +47,6 @@ public class DefaultUpdateContatoUseCase extends UpdateContatoUseCase {
         contato.update(command.nome(), command.contato(), profissional);
     }
 
-    private void checkProfissionalExists(IdProfissional profissionalId) {
-        final var profissionalMissing = !profissionalGateway.existsById(profissionalId);
-        if (profissionalMissing) {
-            throw notFound(Profissional.class, profissionalId.getValue()).get();
-        }
-    }
-
     private static Supplier<NotFoundException> notFound(Class<?> clazz, String id) {
         return () -> new NotFoundException("%s com ID %s não foi encontrado".formatted(clazz.getSimpleName(), id));
     }
