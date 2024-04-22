@@ -24,6 +24,7 @@ public interface ProfissionalJpaRepository extends JpaRepository<ProfissionalJpa
                 WHERE
                   c.nome LIKE :q
                   OR c.cargo LIKE :q
+                  AND c.active = TRUE
                 """.formatted(String.join(", ", fields));
 
         Query nativeQuery = entityManager.createNativeQuery(queryString);
