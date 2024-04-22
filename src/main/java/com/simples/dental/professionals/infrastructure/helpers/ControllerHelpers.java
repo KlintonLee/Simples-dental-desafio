@@ -1,10 +1,24 @@
 package com.simples.dental.professionals.infrastructure.helpers;
 
+import com.simples.dental.professionals.exceptions.UnprocessableEntityException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ControllerHelpers {
+
+    public static LocalDate formatDate(String date) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return LocalDate.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            throw new UnprocessableEntityException("O formato da data deve ser dd-MM-yyyy, por exemplo: 15-02-2000");
+        }
+    }
 
     public static <T> List<String> fieldsMapper(Class<T> clazz, List<String> fields) {
         if (fields == null) {
