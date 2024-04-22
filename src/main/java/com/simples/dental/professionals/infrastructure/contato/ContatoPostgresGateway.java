@@ -5,15 +5,18 @@ import com.simples.dental.professionals.domain.contato.ContatoGateway;
 import com.simples.dental.professionals.domain.contato.ContatoId;
 import com.simples.dental.professionals.domain.pagination.Pagination;
 import com.simples.dental.professionals.domain.pagination.SearchQuery;
+import com.simples.dental.professionals.domain.profissional.IdProfissional;
 import com.simples.dental.professionals.infrastructure.helpers.PersistenceHelpers;
 import com.simples.dental.professionals.infrastructure.contato.persistence.ContatoJpaEntity;
 import com.simples.dental.professionals.infrastructure.contato.persistence.ContatoJpaRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ContatoPostgresGateway implements ContatoGateway {
@@ -51,6 +54,14 @@ public class ContatoPostgresGateway implements ContatoGateway {
         );
 
         return new Pagination<>(aQuery.page(), aQuery.perPage(), items.size(), items);
+    }
+
+    @Override
+    public List<Contato> findAllByProfissional(IdProfissional profissional_id) {
+        return this.repository.findAllByProfissionalId(profissional_id.getValue())
+                .stream()
+                .map(ContatoJpaEntity::toAggregate)
+                .collect(Collectors.toList());
     }
 
     @Override
