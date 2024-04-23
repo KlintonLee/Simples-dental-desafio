@@ -16,20 +16,12 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 - Banco de dados Postgres (para armazenamento dos dados)
 
 ## Ferramentas necessárias
-- Docker
-- Docker compose
-- Java 17+
-- Maven
+- Docker & Docker-compose
 
 ## Rodar aplicação
 - Baixar e acessar o projeto pelo terminal
 - Com o docker em execução, executar o docker compose
-  - `docker-compose up -d`
-  - `docker compose up -d` (para macos)
-- Executar o build da aplicação
-  - `mvn clean install`
-- Executar a aplicação
-  - `java -jar target/<nome_do_arquivo_jar>`
+  - `docker-compose up -d` ou `docker compose up -d`
 
 ## Estrutura do Banco de Dados
 - Tabela contatos

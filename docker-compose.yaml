@@ -1,6 +1,18 @@
-version: '3'
+version: '3.8'
 
 services:
+  app:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    depends_on:
+      - database
+    networks:
+      - my_app
+
   database:
     image: 'postgres:latest'
     ports:
@@ -8,3 +20,8 @@ services:
     environment:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: profissionais
+    networks:
+       - my_app
+
+networks:
+  my_app:
