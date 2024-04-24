@@ -10,8 +10,23 @@ env:
   IMAGE_NAME: klintonlee/simples-dental-desafio
 
 jobs:
+  tests:
+    name: Tests runner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK@17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Run application tests
+        run: mvn test
+
   build:
     name: Build runner
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
