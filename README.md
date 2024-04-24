@@ -23,6 +23,15 @@ Armazenamento dos dados em um banco de dados com duas tabelas: contatos e profis
 - Com o docker em execução, executar o docker compose
   - `docker-compose up -d` ou `docker compose up -d`
 
+## Alternativamente, pode subir a aplicação da seguinte forma:
+- Ter disponível o `Java 17+` e o `Maven`;
+- Baixar e acessar o projeto pelo terminal
+- `docker run -d --name database -p 5432:5432 -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=profissionais postgres:latest`
+- Executar o build da aplicação:
+  - `mvn clean package -Dmaven.test.skip`
+- Executar a aplicação via java -jar
+  - `java -jar target/*.jar`
+
 ## Estrutura do Banco de Dados
 - Tabela contatos
   - id: Identificador único do contato (gerado automaticamente pelo banco de dados).
