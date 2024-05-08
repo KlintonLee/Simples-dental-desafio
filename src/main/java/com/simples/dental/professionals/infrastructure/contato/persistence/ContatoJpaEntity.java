@@ -29,9 +29,6 @@ public class ContatoJpaEntity {
     @JoinColumn(name = "profissional_id", referencedColumnName = "id", nullable = false)
     private ProfissionalJpaEntity profissional;
 
-    @Column(name = "active", nullable = false)
-    private boolean active;
-
     @Column(name = "created_date", nullable = false, columnDefinition = "DATE")
     private LocalDate createdDate;
 
